@@ -5,7 +5,7 @@ The article associated with this repository has been submitted for peer-review. 
 ##  Coming Soon ...
 
 
-### Automatic TMTV and Dmax calculation from segmented .nii binary 3D images [a relative link](read_nii_compute_MTV_Dmax_save_as_csv_file.py)
+### Automatic TMTV and Dmax calculation from segmented .nii binary 3D images [here](read_nii_compute_MTV_Dmax_save_as_csv_file.py)
 1. Read .nii
 2. compute TMTV
 3. Compue Dmax from the centriod of the lessions using ecludean distance 

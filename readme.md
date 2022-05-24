@@ -92,13 +92,13 @@ A typical data directory might look like:
 Please read the documentations before opening an issue !
 
 <font size='4'> Download/clone code to your local computer </font>
-```bash 
+
 
     - git clone https://github.com/KibromBerihu/ai4elife.git
    
     - Alternatively:
       1. go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.
- ```
+
 
 
 
@@ -154,7 +154,7 @@ Please make sure that you organized your data as in the [Required folder structu
     `ai4elife.bat /path/to/created_docker_image path/to/input_data path/to/output_data`
 
 
-### [Transfer learning: Development mode](#transerlearning)
+### [Transfer learning mode: Development](#transerlearning)
 To apply transfer learning by using the trained weights or train the deep learning method from scratch,
 we recommend following the virtual environment based [installation](#virtual) option.
 

@@ -41,18 +41,16 @@ leading to the potential translation of these features into clinical practice.
 
 
 ### Table of contents  
-- [DeepLIFEX](#LFB-Net)
+- [Summary](#introduction)
 - [Table of Contents](#table-of-contents)
+- [ Required folder structure](#Required-folder-structure)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [How to run LFB-Net on a new dataset from scratch](#How-to-run-LFB-Net-on-a-new-dataset-from-scratch)
-  - [Dataset conversion](#dataset-conversion)
-  - [Preprocessing](#preprocessing)
-  - [Training](#training)
-  - [Run inference](#run-inference)
-  - [How to run lfbnet usign pretrained model](#how-to-run-lfb-net-using-pretrained-model)
-  - [Examples](#examples)
+  - [Easy use: Testing mode](#virtual)
+  - [Transfer learning: Development mode](#transer-learning)
+- [Results](#results)
 - [Adapting lFB-net for other configurations or segmentation tasks](#Adapting lFB-net for other configurations or segmentation tasks)
+- [Additional resources](#additional-resource)
 - [Common questions and issues](#common-questions-and-issues)
 - [Useful resources](#useful-resources)
 - [Acknowledgements](#acknowledgments)
@@ -94,11 +92,13 @@ A typical data directory might look like:
 Please read the documentations before opening an issue !
 
 <font size='4'> Download/clone code to your local computer </font>
+```bash 
 
     - `git clone https://github.com/KibromBerihu/ai4elife.git`
    
     - `Alternatively:`
       1. `go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.`
+ ```
 
 
 

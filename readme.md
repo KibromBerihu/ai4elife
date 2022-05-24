@@ -17,8 +17,7 @@ an AI algorithm to segment lymphoma regions automatically. From the segmented im
 surrogate Dmax (sDmax) are calculated and evaluated in terms of predictions for overall survival (OS) and 
 progression-free survival (PFS).
 
-
-![flow-digaram](https://github.com/kibromBerihu/ai4elife/images/graphical-abstract.JPG)
+![flow-digaram](https://github.com/KibromBerihu/ai4elife/blob/main/images/graphical-abstract.JPG)
 
 ***Results:***
 Tested on an independent testing cohort (174 patients), the AI yielded a 0.86 median Dice score (IQR: 0.77-0.92), 87.9%

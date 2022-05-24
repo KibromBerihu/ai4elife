@@ -107,7 +107,7 @@ Please read the documentations before opening an issue !
        1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) how to create virtual environment using 
          conda.  <br/><br>
        2) Open terminal or Anaconda Prompt <br/><br>
-       3) Change the working directory to the downloaded and unzipped ai4life folder <br/><br>
+       3) Change the working directory to the downloaded and unzipped ai4elife folder <br/><br>
        4) Create the virtual environment provided in the requirements.yaml: 
       
            `conda env create -f environment.yml`
@@ -125,7 +125,7 @@ Please read the documentations before opening an issue !
 
    2) <font size ="4"> Using docker image: building image from dockerfile </font> <br/><br>
       
-      1) Assuming you already have [docker desktop](https://www.docker.com/) installed. For more information kindly read [THIS](https://docs.docker.com/). 
+      1) Assuming you already have [docker desktop](https://www.docker.com/) installed. For more information kindly refer to [THIS](https://docs.docker.com/). 
       <br/><br>
       
       2) Make sure to change the directory to the downloaded and unzipped ai4elife directory. 

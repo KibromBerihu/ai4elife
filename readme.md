@@ -18,6 +18,7 @@ surrogate Dmax (sDmax) are calculated and evaluated in terms of predictions for 
 progression-free survival (PFS).
 
 ![flow-digaram](https://github.com/KibromBerihu/ai4elife/blob/main/images/graphical-abstract.JPG)
+               *Flow diagram of the proposed ata-centeric AI*
 
 ***Results:***
 Tested on an independent testing cohort (174 patients), the AI yielded a 0.86 median Dice score (IQR: 0.77-0.92), 87.9%
@@ -129,11 +130,11 @@ Please read the documentations before opening an issue !
       
       2) Make sure to change the directory to the downloaded and unzipped ai4elife directory. 
       <br/><br>
-      3) Run the following commands to create docker container with the name 'ai4elife'.
+      3) Run the following commands to create docker container with the name 'ai4elife:v1'
       <br/><br>
 
          1. `docker build -t ai4elife:v1 .`
-         2. `ai4elife.bat /path/to/created_docker_image path/to/input_data  path/to/output_data`
+
          
 
 ### 💻  Usage 

@@ -94,10 +94,10 @@ Please read the documentations before opening an issue !
 <font size='4'> Download/clone code to your local computer </font>
 ```bash 
 
-    - `git clone https://github.com/KibromBerihu/ai4elife.git`
+    - git clone https://github.com/KibromBerihu/ai4elife.git
    
-    - `Alternatively:`
-      1. `go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.`
+    - Alternatively:
+      1. go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.
  ```
 
 

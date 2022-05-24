@@ -58,8 +58,7 @@ leading to the potential translation of these features into clinical practice.
 
 ## 📁 Required folder structure
 
-It automatically analyses all cases on a given directory. All cases need to be given in a parent directory of
-any NAME.
+Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
 
 A typical data directory might look like:
 
@@ -139,7 +138,6 @@ Please read the documentations before opening an issue !
          
 
 ### 💻  Usage 
-To use it on your own dataset for lymphoma segmentation, first, please look at the [Examples](#Examples).
 This package have two usage. The first one is to predict on a given test data set using the pretrained weights, named as easy use case. 
 The second use case is for transfer learning or retraining it from scratch on your own dataset. 
 

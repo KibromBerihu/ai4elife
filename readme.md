@@ -18,7 +18,8 @@ surrogate Dmax (sDmax) are calculated and evaluated in terms of predictions for 
 progression-free survival (PFS).
 
 ![flow-digaram](https://github.com/KibromBerihu/ai4elife/blob/main/images/graphical-abstract.JPG)
-               *Flow diagram of the proposed ata-centeric AI*
+
+*Figue 1: Flow diagram of the proposed data-centeric AI.
 
 ***Results:***
 Tested on an independent testing cohort (174 patients), the AI yielded a 0.86 median Dice score (IQR: 0.77-0.92), 87.9%

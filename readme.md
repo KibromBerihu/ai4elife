@@ -1,5 +1,5 @@
 
-## **[20202_5_5] Update: AI4eLIFE: Easing local image feature extraction using AI.**
+## *[20202_5_5] Update: AI4eLIFE: Easing local image feature extraction using AI.*
 
 #### [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine (JNM), 2022.** 
 
@@ -41,19 +41,17 @@ leading to the potential translation of these features into clinical practice.
 
 
 ### Table of contents  
-- [DeepLIFEX](#LFB-Net)
+- [Summary](#introduction)
 - [Table of Contents](#table-of-contents)
+- [ Required folder structure](#Required-folder-structure)
 - [Installation](#installation)
 - [Usage](#usage)
-  - [How to run LFB-Net on a new dataset from scratch](#How-to-run-LFB-Net-on-a-new-dataset-from-scratch)
-  - [Dataset conversion](#dataset-conversion)
-  - [Preprocessing](#preprocessing)
-  - [Training](#training)
-  - [Run inference](#run-inference)
-  - [How to run lfbnet usign pretrained model](#how-to-run-lfb-net-using-pretrained-model)
-  - [Examples](#examples)
-- [Adapting lFB-net for other configurations or segmentation tasks](#Adapting lFB-net for other configurations or segmentation tasks)
+  - [Easy use: testing mode](#virtual)
+  - [Transfer learning: development](#transer-learning)
+- [Results](#results)
 - [Common questions and issues](#common-questions-and-issues)
+- [Citations](#Citations)
+- [Adapting LFBNet for other configurations or segmentation tasks](#configure-or-other-segmentation)
 - [Useful resources](#useful-resources)
 - [Acknowledgements](#acknowledgments)
 
@@ -95,10 +93,12 @@ Please read the documentations before opening an issue !
 
 <font size='4'> Download/clone code to your local computer </font>
 
-    - `git clone https://github.com/KibromBerihu/ai4elife.git`
+
+    - git clone https://github.com/KibromBerihu/ai4elife.git
    
-    - `Alternatively:`
-      1. `go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.`
+    - Alternatively:
+      1. go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.
+ 
 
 
 
@@ -142,7 +142,7 @@ To use it on your own dataset for lymphoma segmentation, first, please look at t
 This package have two usage. The first one is to predict on a given test data set using the pretrained weights, named as easy use case. 
 The second use case is for transfer learning or retraining it from scratch on your own dataset. 
 
-### [Easy use: Testing mode](#virtual) <br/><br>
+### [Easy use: testing mode](#virtual) <br/><br>
 Please make sure that you organized your data as in the [Required folder structure](#directory). 
 1. **Option 1:** Using the virtual environment: <br/><br>
     1. Change to the source directory: `ai4elife/src/' <br/><br>
@@ -154,7 +154,7 @@ Please make sure that you organized your data as in the [Required folder structu
     `ai4elife.bat /path/to/created_docker_image path/to/input_data path/to/output_data`
 
 
-### [Transfer learning: Development mode](#transerlearning)
+### [Transfer learning mode: development](#transerlearning)
 To apply transfer learning by using the trained weights or train the deep learning method from scratch,
 we recommend following the virtual environment based [installation](#virtual) option.
 
@@ -179,15 +179,7 @@ Run the following commands for activating the virtual enviroment, and then train
 kernel size in the convolution, depth of the neural networks and other hyperparameters values. The segmentation 
 model is designed in easy configurable mode. 
    
-### Here is more ...
-check out our documents about:
-- details about configuring the lfbnet 
-- training the model 
-- tools that make your life piece of cake.
-
 ### 📈 Results
-
-
 
 - Two intermediate folders will be generated.
 
@@ -211,7 +203,6 @@ check out our documents about:
 
 - Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as EXCEL file inside the folder `lfbnet/predicted_data_at_[ids]`
 
-
 ### 🙋 FAQ
 Please visit the [FAQ](Documentation/FAQ.md) samples before creating an issue. 
 
@@ -220,6 +211,15 @@ Please cite the following paper when using this:
 
     K. B. Girum, L. Rebaud A.S. Cottereau et. al., "18F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients," in The Journal of Nuclear Medicine.
 
+
+### 💭 How to configure an extended LFBNet to segment any 2D based medical images
+LFBNet is provided as a configurable network for 2D image-based segmentation for both multi-class and single classes.
+Please refer to [THIS](%5BDocumentation/configure.md) guide. 
+
+### 💁️  Useful resources 
+
+- The detailed step by step for preprocessing, dataset split into training and validation cohorts and visulization of 
+results are demonstrated in the jupter_notebook_step_by_step_illustration.jpeg.
 
 ### 🙏 Acknowledgment  
 We thank you [the reader].  

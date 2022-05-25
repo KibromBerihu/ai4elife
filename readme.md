@@ -139,8 +139,9 @@ Please read the documentations before opening an issue !
          
 
 ### 💻  Usage 
-This package has two usages. The first one is to segment tumor regions and then calcualte the surrogate biomaters such as sTMTV and sDmax on the given test dataset using the pretrained weights, named as **"easy use case"**. 
-The second use case is for transfer learning or retraining it from scratch on your own dataset. 
+This package has two usages. 
+The first one is to segment tumor regions and then calculate the surrogate biomarkers such as sTMTV and sDmax on the given test dataset using the pre-trained weights, named as "easy use case". 
+The second use case is transfer learning or retraining from scratch on your own dataset.
 
 ### [Easy use: testing mode](#virtual) <br/><br>
 Please make sure that you organized your data as in the [Required folder structure](#directory). 

@@ -39,7 +39,7 @@ The whole pipeline, including the generation of PET MIPs, automatic segmentation
 for a use case on personal/desktop computers or clusters. It could highly facilitate the analysis of PET MIP-based features 
 leading to the potential translation of these features into clinical practice. 
 
-
+Please refer to the paper for details and also cite the paper if you use LFB-Net for your research. 
 
 ### Table of contents  
 - [Summary](#introduction)
@@ -57,8 +57,9 @@ leading to the potential translation of these features into clinical practice.
 - [Acknowledgements](#acknowledgments)
 
 ## 📁 Required folder structure
-
 Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
+
+To run the program, you only need PET scans (CT is not required) of patients in nifty format, where the PET images are coded in SUV units. If your images have already been segmented, you can also provide the mask (ground truth (GT)) as a binary image in nifty format. Suppose you provided ground truth (GT) data; it will print the dice, sensitivity, and specificity metrics between the reference segmentation by the expert (i.e., GT) and the predicted segmentation by the model. If the ground truth is NOT AVAILABLE, the model will only predict the segmentation. 
 
 A typical data directory might look like:
 
@@ -104,7 +105,7 @@ Please read the documentations before opening an issue !
 
    1) <font size ="4"> To install in virtual environment </font> <br/><br>
       
-       1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) how to create virtual environment using 
+       1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) regarding how to create a virtual environment using 
          conda.  <br/><br>
        2) Open terminal or Anaconda Prompt <br/><br>
        3) Change the working directory to the downloaded and unzipped ai4elife folder <br/><br>
@@ -112,7 +113,7 @@ Please read the documentations before opening an issue !
       
            `conda env create -f environment.yml`
       <br/><br>
-       5) If you choose to use virtual environment, the virtual environment must be activated before executing any scripts:
+       5) If you choose to use a virtual environment, the virtual environment must be activated before executing any script:
       
            `conda activate myenv`
       <br/><br>
@@ -138,7 +139,7 @@ Please read the documentations before opening an issue !
          
 
 ### 💻  Usage 
-This package have two usage. The first one is to predict on a given test data set using the pretrained weights, named as easy use case. 
+This package has two usages. The first one is to segment tumor regions and then calcualte the surrogate biomaters such as sTMTV and sDmax on the given test dataset using the pretrained weights, named as **"easy use case"**. 
 The second use case is for transfer learning or retraining it from scratch on your own dataset. 
 
 ### [Easy use: testing mode](#virtual) <br/><br>
@@ -186,17 +187,17 @@ model is designed in easy configurable mode.
                   
       ```../lfbnet/data/RAW_DATA_FOLDER_NAME_3D```, and 
   
-  - The generated crossponding sagital and coronal images are saved in the folder name       
+  - The generated corresponding sagittal and coronal images are saved in the folder name       
 ``../lfbnet/data/RAW_DATA_FOLDER_NAME_MIP``.
   
-  - For simplicity, the coronal PET MIP images are named as `PET_1.nii`, and sagtial ass `PET_0.nii`, and corresponding 
+  - For simplicity, the coronal PET MIP images are named as `PET_1.nii`, and sagittal as `PET_0.nii`, and corresponding 
  ground truth as `gt_1.nii`, and `gt_0.nii`, respectively.
   
   - NOTE: if there is no ground truth, it will only generate the coronal and sagittal PET MIPs. 
   Kindly check if these generated files are in order.
   
   
-- Predicted results will be saved into the folder `lfbnet/predicted_data_at_[ids]`
+- Predicted results including sTMTV and sDmax will be saved into the folder `lfbnet/predicted_data_at_[ids]`
   where `ids` is automatically generated the time of prediction in the form of month, year, and time.
 
 
@@ -217,8 +218,8 @@ Please refer to [THIS](%5BDocumentation/configure.md) guide.
 
 ### 💁️  Useful resources 
 
-- The detailed step by step for preprocessing, dataset split into training and validation cohorts and visulization of 
-results are demonstrated in the jupter_notebook_step_by_step_illustration.jpeg.
+- The detailed step by step for preprocessing, dataset split into training and validation cohorts and visualization of 
+results are demonstrated in the jupyter_notebook_step_by_step_illustration.jpeg.
 
 ### 🙏 Acknowledgment  
 We thank you [the reader].  

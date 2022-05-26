@@ -135,10 +135,10 @@ Please read the documentations before opening an issue !
       
       2) Make sure to change the directory to the downloaded and unzipped ai4elife directory. 
       <br/><br>
-      3) Run the following commands to create docker container with the name 'ai4elife:v1'
+      3) Run the following commands to create docker image with the name <DockerImageName>:<Tag>'
       <br/><br>
 
-         1. `docker build -t ai4elife:v1 .`
+         1. `docker build -t <DockerImageName>:<Tag> .`
 
          
 
@@ -150,13 +150,13 @@ The second use case is transfer learning or retraining from scratch on your own 
 ### [Easy use: testing mode](#virtual) <br/><br>
 Please make sure that you organized your data as in the [Required folder structure](#directory). 
 1. **Option 1:** Using the virtual environment: <br/><br>
-    1. Change to the source directory: `ai4elife/src/' <br/><br>
+    1. Change to the source directory: `ai4elife/' <br/><br>
     2. Activate the virtual environment: `conda activate myenv` <br/><br>
-    3. Run: `python test_run.py` 
+    3. Run: `python test.py` 
    <br/><br>
 2. **Option 2:** Using the docker: <br/><br>
    
-    `ai4elife.bat /path/to/created_docker_image path/to/input_data path/to/output_data`
+    `run_docker_image.bat path/to/input_data path/to/output_data  <docker_image_name> <Tag>  <container_id>`
 
 
 ### [Transfer learning mode: development](#transerlearning)
@@ -166,17 +166,14 @@ we recommend following the virtual environment based [installation](#virtual) op
 Run the following commands for activating the virtual enviroment, and then training, validating, and testing of the proposed model on your own dataset.
 
 1. Activate the virtual environment:
-   `conda activate ai4elife`
+   `conda activate myenv`
 <br/><br>
-2. To [train](#train) the model from a new dataset: <br/><br>
+2. To [train](#train) the model from a new dataset, change to the ai4elife/src directory: <br/><br>
    
-   `python train.py --input_dir path/to/training_validation_data  --data_id unique_data_name --task train`
+   `python train.py --input_dir path/to/training_validation_data  --data_id <unique_data_name> --task <train>`
 <br/><br>
 3. To [evaluate](#evaluate) on the validation data: <br/><br>
-    `python train.py --input_dir path/to/validation_data  --data_id unique_data_name --task valid`
-<br/><br>
-4. To [predict](#predict) on the testing data: <br/><br>
-    `python train.py --input_dir path/to/testing_data  --data_id unique_data_name --task test`
+    `python train.py --input_dir path/to/validation_data  --data_id <unique_data_name> --task <valid>`
 <br/><br>
 
 **Note:** You can also **configure** the deep learning model for ***parameter and architectural search***, please refer to the documentation 
@@ -190,10 +187,10 @@ model is designed in easy configurable mode.
 
   - The resized and cropped 3D PET and corresponding ground truth  Nifti images are saved under the folder name:
                   
-      ```../lfbnet/data/RAW_DATA_FOLDER_NAME_3D```, and 
+      ```../data/RAW_DATA_FOLDER_NAME_3D```, and 
   
   - The generated corresponding sagittal and coronal images are saved in the folder name       
-``../lfbnet/data/RAW_DATA_FOLDER_NAME_MIP``.
+``../data/RAW_DATA_FOLDER_NAME_MIP``.
   
   - For simplicity, the coronal PET MIP images are named as `PET_1.nii`, and sagittal as `PET_0.nii`, and corresponding 
  ground truth as `gt_1.nii`, and `gt_0.nii`, respectively.
@@ -202,11 +199,11 @@ model is designed in easy configurable mode.
   Kindly check if these generated files are in order.
   
   
-- Predicted results including sTMTV and sDmax will be saved into the folder `lfbnet/predicted_data_at_[ids]`
+- Predicted results including sTMTV and sDmax will be saved into the folder `output/*.csv`
   where `ids` is automatically generated the time of prediction in the form of month, year, and time.
 
 
-- Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as EXCEL file inside the folder `lfbnet/predicted_data_at_[ids]`
+- Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as EXCEL file inside the folder `output/*.csv`
 
 ### 🙋 FAQ
 Please visit the [FAQ](Documentation/FAQ.md) samples before creating an issue. 

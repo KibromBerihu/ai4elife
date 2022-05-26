@@ -1,4 +1,4 @@
-
+﻿
 ## *[20202_5_5] Update: AI4eLIFE: Easing local image feature extraction using AI.*
 
 #### [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine (JNM), 2022.** 
@@ -223,6 +223,7 @@ Please refer to [THIS](%5BDocumentation/configure.md) guide.
 results are demonstrated in the jupyter_notebook_step_by_step_illustration.jpeg.
 
 ### 🙏 Acknowledgment  
+
 We thank you [the reader].  
 
 

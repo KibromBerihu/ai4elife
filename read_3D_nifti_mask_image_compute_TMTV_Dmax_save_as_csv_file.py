@@ -1,5 +1,4 @@
-"""
-KB Girum
+""" Script to compute metabolic tumor volume (TMTV) and dissemination from a given 3D mask images.
 1. read .nii files
 2. read the pixel spacing
 3. compute the total metabolic tumor volume (TMTV)

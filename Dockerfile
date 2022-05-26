@@ -6,7 +6,7 @@ FROM continuumio/anaconda3
 LABEL Name="lfbnet"  
 
 # setting proxies if your are behind proxy companies:
-# refer to: https://docs.docker.com/network/proxy/
+# kindly refer to: https://docs.docker.com/network/proxy/
 
 # define working directory inside the docker image:
 WORKDIR /lfbnet

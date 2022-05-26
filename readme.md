@@ -1,7 +1,7 @@
 ﻿
- 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![Docker build passing](https://img.shields.io/badge/docker%20build-passing-brightgreen)](https://github.com/KibromBerihu/ai4elife/blob/main/Dockerfile) [![img_2.png](img_2.png)]()
-
+ [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
+ [![Docker build passing](https://img.shields.io/badge/docker%20build-passing-brightgreen)](https://github.com/KibromBerihu/ai4elife/blob/main/Dockerfile) 
+ [![Downloads](https://img.shields.io/github/downloads/KibromBerihu/ai4elife/total.svg)]() 
 
 ## *[20202_5_5] Update: AI4eLIFE: Easing local image feature extraction using AI.*
 

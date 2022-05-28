@@ -151,7 +151,7 @@ Please make sure that you organized your data as in the [Required folder structu
 1. **Option 1:** Using the virtual environment: <br/><br>
     1. Change to the source directory: `ai4elife/' <br/><br>
     2. Activate the virtual environment: `conda activate myenv` <br/><br>
-    3. Run: `python test.py` 
+    3. Run: `python test_env.py  --input_dir path/to/input/data  --output_dir path/to/output` 
    <br/><br>
 2. **Option 2:** Using the docker: <br/><br>
    

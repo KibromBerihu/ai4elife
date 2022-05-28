@@ -22,7 +22,7 @@ progression-free survival (PFS).
 
 ![flow-digaram](https://github.com/KibromBerihu/ai4elife/blob/main/images/graphical-abstract.JPG)
 
-*Figue 1: Flow diagram of the proposed data-centeric AI to automatically measure prognostic biomarkers.*
+*Figure 1: Flow diagram of the proposed data-centric AI to measure prognostic biomarkers automatically.*
 
 ***Results:***
 Tested on an independent testing cohort (174 patients), the AI yielded a 0.86 median Dice score (IQR: 0.77-0.92), 87.9%
@@ -33,7 +33,7 @@ features can be used to predict the OS and PFS in DLBCL patients, equivalent to 
 ***Deep learning Model:*** 
 We adapted the deep learning-based robust medical image segmentation method [LFB-Net](https://doi.org/10.1109/TMI.2021.3060497).
 Please refer to the [paper](https://doi.org/10.1109/TMI.2021.3060497) 
-for details and also cite the paper if you use lfbnet for your research. 
+for details, and cite the paper if you use lfbnet for your research. 
 
 [comment]: <![img_7.png](img_7.png)>
 
@@ -42,7 +42,7 @@ The whole pipeline, including the generation of PET MIPs, automatic segmentation
 for a use case on personal/desktop computers or clusters. It could highly facilitate the analysis of PET MIP-based features 
 leading to the potential translation of these features into clinical practice. 
 
-Please refer to the paper for details and also cite the paper if you use LFB-Net for your research. 
+Please refer to the paper for details and cite the paper if you use LFB-Net for your research. 
 
 ### Table of contents  
 - [Summary](#introduction)
@@ -93,7 +93,7 @@ A typical data directory might look like:
 
 
 ### ⚙️  Installation
-Please read the documentations before opening an issue !
+Please read the documentation before opening an issue!
 
 <font size='4'> Download/clone code to your local computer </font>
 
@@ -124,17 +124,17 @@ Please read the documentations before opening an issue !
    
             `cond info --envs`
       
-           <font size='2'>  If you can see the virtual environment with name 'myenv', well done, the virtual environment and dependencies are installed successfully. </font>
+           <font size='2'>  If you can see the virtual environment with a name 'myenv', well done, the virtual environment and dependencies are installed successfully. </font>
          
 
-   2) <font size ="4"> Using docker image: building image from dockerfile </font> <br/><br>
+   2) <font size ="4"> Using docker image: building image from docker file </font> <br/><br>
       
-      1) Assuming you already have [docker desktop](https://www.docker.com/) installed. For more information kindly refer to [THIS](https://docs.docker.com/). 
+      1) Assuming you already have [docker desktop](https://www.docker.com/) installed. For more information, kindly refer to [THIS](https://docs.docker.com/). 
       <br/><br>
       
       2) Make sure to change the directory to the downloaded and unzipped ai4elife directory. 
       <br/><br>
-      3) Run the following commands to create docker image with the name <DockerImageName>:<Tag>'
+      3) Run the following commands to create a docker image with the name <DockerImageName>:<Tag>'
       <br/><br>
 
          1. `docker build -t <DockerImageName>:<Tag> .`
@@ -159,8 +159,8 @@ Please make sure that you organized your data as in the [Required folder structu
 
 
 ### [Transfer learning mode: development](#transerlearning)
-To apply transfer learning by using the trained weights or train the deep learning method from scratch,
-we recommend following the virtual environment based [installation](#virtual) option.
+To apply transfer learning by using the trained weights or training the deep learning method from scratch,
+we recommend following the virtual environment-based [installation](#virtual) option.
 
 Run the following commands for activating the virtual enviroment, and then training, validating, and testing of the proposed model on your own dataset.
 
@@ -175,34 +175,32 @@ Run the following commands for activating the virtual enviroment, and then train
     `python train.py --input_dir path/to/validation_data  --data_id <unique_data_name> --task <valid>`
 <br/><br>
 
-**Note:** You can also **configure** the deep learning model for ***parameter and architectural search***, please refer to the documentation 
-[configuration](architectural_and_parameter_search.md). Briefly, you can apply different number of features,
-kernel size in the convolution, depth of the neural networks and other hyperparameters values. The segmentation 
+**Note:** You can also **configure** the deep learning model for **parameter and architectural search**. Please refer to the documentation
+[configuration](architectural_and_parameter_search.md). Briefly, you can apply different features, kernel size in the convolution, depth of the neural networks, and other hyperparameters values. The segmentation 
 model is designed in easy configurable mode. 
    
 ### 📈 Results
 
 - Two intermediate folders will be generated.
 
-  - The resized and cropped 3D PET and corresponding ground truth  Nifti images are saved under the folder name:
+  - The resized and cropped 3D PET, and corresponding ground truth  Nifti images are saved under the folder name:
                   
-      ```../data/RAW_DATA_FOLDER_NAME_3D```, and 
+      ```../output/data_default_3d_dir```, and 
   
   - The generated corresponding sagittal and coronal images are saved in the folder name       
-``../data/RAW_DATA_FOLDER_NAME_MIP``.
+``../output/data_default_mip_dir``.
   
-  - For simplicity, the coronal PET MIP images are named as `PET_1.nii`, and sagittal as `PET_0.nii`, and corresponding 
- ground truth as `gt_1.nii`, and `gt_0.nii`, respectively.
+  - For simplicity, the coronal PET MIP images are `PET_1.nii`, sagittal as `PET_0.nii`, and corresponding ground truth as `gt_1.nii`, and `gt_0.nii`, respectively.
   
   - NOTE: if there is no ground truth, it will only generate the coronal and sagittal PET MIPs. 
   Kindly check if these generated files are in order.
   
   
-- Predicted results including sTMTV and sDmax will be saved into the folder `output/*.csv`
-  where `ids` is automatically generated the time of prediction in the form of month, year, and time.
+- Predicted results, including sTMTV and sDmax, will be saved into the folder `output/*.csv`, 
+where the CSV file's name is automatically generated with the time of prediction in the month, year, and time.
 
 
-- Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as EXCEL file inside the folder `output/*.csv`
+- Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as an EXCEL file inside the folder `output/*.csv`
 
 ### 🙋 FAQ
 Please visit the [FAQ](Documentation/FAQ.md) samples before creating an issue. 
@@ -213,14 +211,13 @@ Please cite the following paper when using this:
     K. B. Girum, L. Rebaud A.S. Cottereau et. al., "18F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients," in The Journal of Nuclear Medicine.
 
 
-### 💭 How to configure an extended LFBNet to segment any 2D based medical images
-LFBNet is provided as a configurable network for 2D image-based segmentation for both multi-class and single classes.
+### 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 
+LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.
 Please refer to [THIS](%5BDocumentation/configure.md) guide. 
 
 ### 💁️  Useful resources 
 
-- The detailed step by step for preprocessing, dataset split into training and validation cohorts and visualization of 
-results are demonstrated in the jupyter_notebook_step_by_step_illustration.jpeg.
+- The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
 
 ### 🙏 Acknowledgment  
 

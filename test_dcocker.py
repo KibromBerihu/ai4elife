@@ -1,10 +1,6 @@
-"""script to predict the segmentation results of a given testing dataset.
+"""script predicts the segmentation results of a given testing dataset using docker image.
 
-This script allows to the user to enter the directory path to the testing PET images.  It also accepts the output
-directory to save predicted Nifti images and computed quantitative biomarkers features.
-If you chose to run it using a virtual environment, please activate the enviroment first.
-
-By K.B. GIRUM
+This script allows users to execute the whole-pipline using docker image.
 """
 
 import os
@@ -54,16 +50,17 @@ def main():
     # Path to the parent/main directory. Please read readme.md for how to organize your files.
     input_dir = "/input_data"
 
+    # parameters to set
     dataset_name = 'data'
     desired_spacing = [4.0, 4.0, 4.0]
 
     # path to the preprocessed data
     preprocessing_data_dir = "/output"
+
     preprocessing_params = dict(
         data_path=input_dir, data_name=dataset_name, saving_dir=preprocessing_data_dir, save_3D=True,
         output_resolution=[128, 128, 256], desired_spacing=desired_spacing, generate_mip=True
         )
-
     mip_data_dir = preprocessing.read_pet_gt_resize_crop_save_as_3d_andor_mip(**preprocessing_params)
 
     # get list of all patient names from the generated mip directory

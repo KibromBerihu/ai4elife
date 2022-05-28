@@ -1,10 +1,9 @@
-"""script to predict the segmentation results of a given testing dataset.
+"""script predicts the segmentation results of a given testing dataset using a virtual environment.
 
-This script allows to the user to enter the directory path to the testing PET images.  It also accepts the output
-directory to save predicted Nifti images and computed quantitative biomarkers features.
-If you chose to run it using a virtual environment, please activate the enviroment first.
+This script allows users to enter the directory path to the testing PET images.  It also accepts the output
+directory to save predicted Nifti images and computed quantitative biomarkers features. If you chose to run it using a
+virtual environment, please activate the environment first.
 
-By K.B. GIRUM
 """
 
 import os

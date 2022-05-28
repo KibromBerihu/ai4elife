@@ -27,4 +27,4 @@ RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
 # Run the main python code when the container is started:# 
-ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "myenv", "python", "/lfbnet/test.py"]
+ENTRYPOINT ["conda", "run", "--no-capture-output", "-n", "myenv", "python", "/lfbnet/test_dcocker.py"]

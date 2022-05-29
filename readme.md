@@ -58,17 +58,6 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Adapting LFBNet for other configurations or segmentation tasks](#-how-to-configure-an-extended-lfbnet-for-other-2d-based-medical-image-segmentation)
 - [Useful resources](#-useful-resources) 
 - [Acknowledgements](#-acknowledgments)
-- [ Required folder structure](#Required-folder-structure)
-- [Installation](#installation)
-- [Usage](#usage)
-  - [Easy use: testing mode](#virtual)
-  - [Transfer learning: development](#transer-learning)
-- [Results](#results)
-- [Common questions and issues](#common-questions-and-issues)
-- [Citations](#Citations)
-- [Adapting LFBNet for other configurations or segmentation tasks](#-a-namehow-to-configure-lfbnet-for-other-applicationsa-how-to-configure-an-extended-lfbnet-for-other-2d-based-medical-image-segmentation)
-- [Useful resources](#useful-resources)
-- [Acknowledgements](#acknowledgments)
 
 ## 📁 <a name="required-folder-structure"></a> Required folder structure
 Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
@@ -158,7 +147,7 @@ This package has two usages.
 The first one is to segment tumor regions and then calculate the surrogate biomarkers such as sTMTV and sDmax on the given test dataset using the pre-trained weights, named as "easy use case". 
 The second use case is transfer learning or retraining from scratch on your own dataset.
 
-### <a name="easy-use-case-mode"></a> [Easy use: testing mode](#virtual) <br/><br>
+### [Easy use: testing mode](#virtual) <br/><br>
 Please make sure that you organized your data as in the [Required folder structure](#directory). 
 1. **Option 1:** Using the virtual environment: <br/><br>
     1. Change to the source directory: `ai4elife/' <br/><br>
@@ -170,7 +159,7 @@ Please make sure that you organized your data as in the [Required folder structu
     `run_docker_image.bat path/to/input_data path/to/output_data  <docker_image_name> <Tag>  <container_id>`
 
 
-### <a name="transfer-leraning-mode"></a> [Transfer learning mode: development](#transerlearning)
+### [Transfer learning mode: development](#transerlearning)
 To apply transfer learning by using the trained weights or training the deep learning method from scratch,
 we recommend following the virtual environment-based [installation](#virtual) option.
 
@@ -191,7 +180,7 @@ Run the following commands for activating the virtual enviroment, and then train
 [configuration](architectural_and_parameter_search.md). Briefly, you can apply different features, kernel size in the convolution, depth of the neural networks, and other hyperparameters values. The segmentation 
 model is designed in easy configurable mode. 
    
-### 📈 <a name="results"></a> Results
+### 📈 Results
 
 - Two intermediate folders will be generated.
 
@@ -214,32 +203,10 @@ where the CSV file's name is automatically generated with the time of prediction
 
 - Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as an EXCEL file inside the folder `output/*.csv`
 
-### 🙋 <a name="faq"></a> FAQ
-Please visit the [FAQ](Documentation/FAQ.md) samples before creating an issue. 
-
-### 📖 <a name="citations"></a> Citations 
-Please cite the following paper when using this:
-
-    K. B. Girum, L. Rebaud A.S. Cottereau et. al., "18F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients," in The Journal of Nuclear Medicine.
-
-
-### 💭 <a name="how-to-configure-lfbnet-for-other-applications"></a> How to configure an extended LFBNet for other 2D-based medical image segmentation? 
-LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.
-Please refer to [THIS](%5BDocumentation/configure.md) guide. 
-
-<<<<<<< HEAD
-### 💁️ Useful resources 
-
+### 💁️ Useful resources
 - The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
 
-### 🙏 Acknowledgments  
-=======
-### 💁️ <a name="useful-resources"></a> Useful resources 
-
-- The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
-
-### 🙏 <a name="acknowledgment"></a> Acknowledgment  
-
+### 🙏 Acknowledgments
 We thank you [the reader].  
 
 

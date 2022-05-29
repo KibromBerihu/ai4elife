@@ -47,7 +47,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 ### Table of contents  
 - [Summary](#introduction)
 - [Table of Contents](#table-of-contents)
-- [ Required folder structure](#required-folder-structure)
+- [ Required folder structure](#Required-folder-structure)
 - [Installation](#installation)
 - [Usage](#usage)
   - [Easy use: testing mode](#virtual)
@@ -55,11 +55,11 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Results](#results)
 - [Common questions and issues](#common-questions-and-issues)
 - [Citations](#Citations)
-- [Adapting LFBNet for other configurations or segmentation tasks](#configure-or-other-segmentation)
+- [Adapting LFBNet for other configurations or segmentation tasks](#-a-namehow-to-configure-lfbnet-for-other-applicationsa-how-to-configure-an-extended-lfbnet-for-other-2d-based-medical-image-segmentation)
 - [Useful resources](#useful-resources)
-- [Acknowledgements](#custom_anchor_name)
+- [Acknowledgements](#acknowledgments)
 
-## 📁 Required folder structure
+## 📁 <a name="required-folder-structure"></a> Required folder structure
 Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
 
 To run the program, you only need PET scans (CT is not required) of patients in nifty format, where the PET images are coded in SUV units. If your images have already been segmented, you can also provide the mask (ground truth (GT)) as a binary image in nifty format. Suppose you provided ground truth (GT) data; it will print the dice, sensitivity, and specificity metrics between the reference segmentation by the expert (i.e., GT) and the predicted segmentation by the model. If the ground truth is NOT AVAILABLE, the model will only predict the segmentation. 
@@ -92,7 +92,7 @@ A typical data directory might look like:
 
 
 
-### ⚙️  Installation
+### ⚙️<a name="installation"></a> Installation
 Please read the documentation before opening an issue!
 
 <font size='4'> Download/clone code to your local computer </font>
@@ -141,12 +141,12 @@ Please read the documentation before opening an issue!
 
          
 
-### 💻 Usage 
+### 💻 <a name="usage"></a> Usage 
 This package has two usages. 
 The first one is to segment tumor regions and then calculate the surrogate biomarkers such as sTMTV and sDmax on the given test dataset using the pre-trained weights, named as "easy use case". 
 The second use case is transfer learning or retraining from scratch on your own dataset.
 
-### [Easy use: testing mode](#virtual) <br/><br>
+### <a name="easy-use-case-mode"></a> [Easy use: testing mode](#virtual) <br/><br>
 Please make sure that you organized your data as in the [Required folder structure](#directory). 
 1. **Option 1:** Using the virtual environment: <br/><br>
     1. Change to the source directory: `ai4elife/' <br/><br>
@@ -158,7 +158,7 @@ Please make sure that you organized your data as in the [Required folder structu
     `run_docker_image.bat path/to/input_data path/to/output_data  <docker_image_name> <Tag>  <container_id>`
 
 
-### [Transfer learning mode: development](#transerlearning)
+### <a name="transfer-leraning-mode"></a> [Transfer learning mode: development](#transerlearning)
 To apply transfer learning by using the trained weights or training the deep learning method from scratch,
 we recommend following the virtual environment-based [installation](#virtual) option.
 
@@ -179,7 +179,7 @@ Run the following commands for activating the virtual enviroment, and then train
 [configuration](architectural_and_parameter_search.md). Briefly, you can apply different features, kernel size in the convolution, depth of the neural networks, and other hyperparameters values. The segmentation 
 model is designed in easy configurable mode. 
    
-### 📈 Results
+### 📈 <a name="results"></a> Results
 
 - Two intermediate folders will be generated.
 
@@ -202,24 +202,24 @@ where the CSV file's name is automatically generated with the time of prediction
 
 - Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as an EXCEL file inside the folder `output/*.csv`
 
-### 🙋 FAQ
+### 🙋 <a name="faq"></a> FAQ
 Please visit the [FAQ](Documentation/FAQ.md) samples before creating an issue. 
 
-### 📖 Citations 
+### 📖 <a name="citations"></a> Citations 
 Please cite the following paper when using this:
 
     K. B. Girum, L. Rebaud A.S. Cottereau et. al., "18F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients," in The Journal of Nuclear Medicine.
 
 
-### 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 
+### 💭 <a name="how-to-configure-lfbnet-for-other-applications"></a> How to configure an extended LFBNet for other 2D-based medical image segmentation? 
 LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.
 Please refer to [THIS](%5BDocumentation/configure.md) guide. 
 
-### 💁️  Useful resources 
+### 💁️ <a name="useful-resources"></a> Useful resources 
 
 - The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
 
-### 🙏 <a name="custom_anchor_name"></a> Acknowledgment  
+### 🙏 <a name="acknowledgment"></a> Acknowledgment  
 
 We thank you [the reader].  
 

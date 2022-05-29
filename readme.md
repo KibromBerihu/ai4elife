@@ -200,7 +200,7 @@ where the CSV file's name is automatically generated with the time of prediction
 
 
 ### 🙋 FAQ
-Please visit the [FAQ](Documentation/FAQ.md) samples before creating an issue. 
+Please visit the [FAQ](https://github.com/KibromBerihu/ai4elife/blob/main/documentation/FAQ.md) samples before creating an issue. 
 
 ### 📖 Citations 
 Please cite the following paper when using this:

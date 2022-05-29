@@ -3,7 +3,7 @@
 - [Do I need CT images? ](#do-i-need-ct-images)
 - [Where can I find the segmentation results, and computed biomarker features?](#where-can-i-find-the-segmentation-results-and-computed-biomarker-features)
 - [Can I apply the proposed method to the 2D PET image-based segmentation](#can-i-apply-the-proposed-method-to-the-2d-pet-image-based-segmentation)
-- [Can I run lfbnet on CPUS or GPUS?](#can-i-run-lfbnet-on-cpus-or-gpus)
+- [Can I run lfbnet on CPUs or GPUs?](#can-i-run-lfbnet-on-cpus-or-gpus)
 - [Can I compare the predictability of the 2D biomarkers with 3D biomarkers?](#can-i-compare-the-predictability-of-the-2d-biomarkers-with-the-3d-biomarkers)
 ###  Do I need CT images? 
 To run the program, you do not need CT scans. You only need PET scans in a nifty format where the PET images are coded
@@ -37,7 +37,7 @@ Kindly run the following command:
 ``python test_train_valid.py --input_dir path/to/input/data --output_dir path/to/output/data  --task [train, test, valid]``
 
 
-### Can I run lfbnet on CPUS or GPUS? 
+### Can I run lfbnet on CPUs or GPUs? 
 The whole package is tested on window 10 and ubuntu. If installing the dependencies is successful,
 the package can run on either CPU or GPU. 
 Please refer to [this]((https://github.com/KibromBerihu/ai4elife/blob/main/documentation/configuration)) for a more detailed selection of GPUs.

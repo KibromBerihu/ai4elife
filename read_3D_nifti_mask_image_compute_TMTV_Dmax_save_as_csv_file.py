@@ -107,14 +107,8 @@ def read_nii_mask_save_csv_tmtv_dmax(input_path, output_path):
 
 if __name__ == "__main__":
     # We assume the .nii file name and the folder name are the same
-    parser = argparse.ArgumentParser(description="script to read nii files and comute TMTV and Dmax")
-    parser.add_argument("input_path", type=str, help="Input data path to folders of .nii files")
-    parser.add_argument("output_path", type=str, help="Output path to save .csv file")
+    parser = argparse.ArgumentParser(description="script to read nii files and compute TMTV and Dmax")
+    parser.add_argument("--input_dir", dest='input_dir',  type=pathlib.Path, help="Input directory path to .nii files")
+    parser.add_argument("--output_dir", dest='output_dir',  type=str, help='output directory path')
     args = parser.parse_args()
-
-    # input and output path
-    if args is None:
-        # User defined path
-        args.input_path = "G:/Vienna_nii"
-        args.output_path = "G:/Excel_files"
-    read_nii_mask_save_csv_tmtv_dmax(args.input_path, args.output_path)
+    read_nii_mask_save_csv_tmtv_dmax(args.input_dir, args.output_dir)

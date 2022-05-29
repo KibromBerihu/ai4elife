@@ -88,7 +88,7 @@ A typical data directory might look like:
     |           |-- GT                                      <-- The corresponding ground truth folder for the .nii file  
                     | -- name.nii or name.nii.gz            <-- The ground truth (GT) image in nifti format (Name can be anything)
 
-###⚙️Installation
+### ⚙️Installation
 
 Please read the documentation before opening an issue!
 

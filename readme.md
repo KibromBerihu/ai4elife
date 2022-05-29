@@ -92,7 +92,7 @@ A typical data directory might look like:
 
 
 
-### ⚙️  # Installation
+### ⚙️  Installation
 Please read the documentation before opening an issue!
 
 <font size='4'> Download/clone code to your local computer </font>
@@ -141,7 +141,7 @@ Please read the documentation before opening an issue!
 
          
 
-### 💻  # Usage 
+### 💻 Usage 
 This package has two usages. 
 The first one is to segment tumor regions and then calculate the surrogate biomarkers such as sTMTV and sDmax on the given test dataset using the pre-trained weights, named as "easy use case". 
 The second use case is transfer learning or retraining from scratch on your own dataset.

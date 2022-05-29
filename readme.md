@@ -57,7 +57,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Citations](#Citations)
 - [Adapting LFBNet for other configurations or segmentation tasks](#configure-or-other-segmentation)
 - [Useful resources](#useful-resources)
-- [Acknowledgements](#acknowledgments)
+- [Acknowledgements](#custom_anchor_name)
 
 ## 📁 Required folder structure
 Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
@@ -219,7 +219,7 @@ Please refer to [THIS](%5BDocumentation/configure.md) guide.
 
 - The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
 
-### 🙏 Acknowledgment  
+### 🙏 <a name="custom_anchor_name"></a> Acknowledgment  
 
 We thank you [the reader].  
 

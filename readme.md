@@ -48,7 +48,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Summary](#introduction)
 - [Table of Contents](#table-of-contents)
 - [ Required folder structure](#-required-folder-structure)
-- [Installation](#-installation)
+- [Installation](#installation)
 - [Usage](#-usage)
   - [Easy use: testing mode](#easy-use-testing-modevirtual-brbr)
   - [Transfer learning: development](#transfer-learning-mode-developmenttranserlearning)
@@ -59,7 +59,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Useful resources](#-useful-resources) 
 - [Acknowledgements](#-acknowledgments)
 
-## 📁 <a name="required-folder-structure"></a> Required folder structure
+## 📁 Required folder structure
 Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
 
 To run the program, you only need PET scans (CT is not required) of patients in nifty format, where the PET images are coded in SUV units. If your images have already been segmented, you can also provide the mask (ground truth (GT)) as a binary image in nifty format. Suppose you provided ground truth (GT) data; it will print the dice, sensitivity, and specificity metrics between the reference segmentation by the expert (i.e., GT) and the predicted segmentation by the model. If the ground truth is NOT AVAILABLE, the model will only predict the segmentation. 
@@ -88,12 +88,10 @@ A typical data directory might look like:
     |           |-- GT                                      <-- The corresponding ground truth folder for the .nii file  
                     | -- name.nii or name.nii.gz            <-- The ground truth (GT) image in nifti format (Name can be anything)
 
-
-
-
-
 ###⚙️Installation
+
 Please read the documentation before opening an issue!
+
 
 <font size='4'> Download/clone code to your local computer </font>
 
@@ -138,9 +136,6 @@ Please read the documentation before opening an issue!
       <br/><br>
 
          1. `docker build -t <DockerImageName>:<Tag> .`
-
-         
-
 
 ### 💻 Usage
 This package has two usages. 
@@ -202,6 +197,21 @@ where the CSV file's name is automatically generated with the time of prediction
 
 
 - Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as an EXCEL file inside the folder `output/*.csv`
+
+
+### 🙋 FAQ
+Please visit the [FAQ](Documentation/FAQ.md) samples before creating an issue. 
+
+### 📖 Citations 
+Please cite the following paper when using this:
+
+    K. B. Girum, L. Rebaud A.S. Cottereau et. al., "18F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients," in The Journal of Nuclear Medicine.
+
+
+### 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 
+LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.
+Please refer to [THIS](%5BDocumentation/configure.md) guide. 
+
 
 ### 💁️ Useful resources
 - The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).

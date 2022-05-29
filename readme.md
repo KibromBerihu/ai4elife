@@ -4,7 +4,7 @@
 
 ## *[20202_5_5] Update: AI4eLIFE: Easing local image feature extraction using AI.*
 
-#### [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine (JNM), 2022.** 
+#### <a name="introduction"> [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine (JNM), 2022.** 
 
 ***Introduction:***
 Baseline 18F-FDG PET/CT image-driven features have shown predictive values in Diffuse Large B-cell lymphoma (DLBCL)
@@ -47,6 +47,19 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 ### Table of contents  
 - [Summary](#introduction)
 - [Table of Contents](#table-of-contents)
+<<<<<<< HEAD
+- [ Required folder structure](#-required-folder-structure)
+- [Installation](#-installation)
+- [Usage](#-usage)
+  - [Easy use: testing mode](#easy-use-testing-modevirtual-brbr)
+  - [Transfer learning: development](#transfer-learning-mode-developmenttranserlearning)
+- [Results](#-results)
+- [FAQ](#-faq)
+- [Citations](#-citations)
+- [Adapting LFBNet for other configurations or segmentation tasks](#-how-to-configure-an-extended-lfbnet-for-other-2d-based-medical-image-segmentation)
+- [Useful resources](#-useful-resources) 
+- [Acknowledgements](#-acknowledgments)
+=======
 - [ Required folder structure](#Required-folder-structure)
 - [Installation](#installation)
 - [Usage](#usage)
@@ -58,6 +71,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Adapting LFBNet for other configurations or segmentation tasks](#-a-namehow-to-configure-lfbnet-for-other-applicationsa-how-to-configure-an-extended-lfbnet-for-other-2d-based-medical-image-segmentation)
 - [Useful resources](#useful-resources)
 - [Acknowledgements](#acknowledgments)
+>>>>>>> a756924a4268bb91d01393df60ed66191c23dcd2
 
 ## 📁 <a name="required-folder-structure"></a> Required folder structure
 Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
@@ -92,7 +106,11 @@ A typical data directory might look like:
 
 
 
+<<<<<<< HEAD
+###⚙️Installation
+=======
 ### ⚙️<a name="installation"></a> Installation
+>>>>>>> a756924a4268bb91d01393df60ed66191c23dcd2
 Please read the documentation before opening an issue!
 
 <font size='4'> Download/clone code to your local computer </font>
@@ -141,7 +159,11 @@ Please read the documentation before opening an issue!
 
          
 
+<<<<<<< HEAD
+### 💻 Usage 
+=======
 ### 💻 <a name="usage"></a> Usage 
+>>>>>>> a756924a4268bb91d01393df60ed66191c23dcd2
 This package has two usages. 
 The first one is to segment tumor regions and then calculate the surrogate biomarkers such as sTMTV and sDmax on the given test dataset using the pre-trained weights, named as "easy use case". 
 The second use case is transfer learning or retraining from scratch on your own dataset.
@@ -215,11 +237,19 @@ Please cite the following paper when using this:
 LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.
 Please refer to [THIS](%5BDocumentation/configure.md) guide. 
 
+<<<<<<< HEAD
+### 💁️ Useful resources 
+
+- The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
+
+### 🙏 Acknowledgments  
+=======
 ### 💁️ <a name="useful-resources"></a> Useful resources 
 
 - The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
 
 ### 🙏 <a name="acknowledgment"></a> Acknowledgment  
+>>>>>>> a756924a4268bb91d01393df60ed66191c23dcd2
 
 We thank you [the reader].  
 

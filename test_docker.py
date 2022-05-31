@@ -1,6 +1,6 @@
-"""script predicts the segmentation results of a given testing dataset using docker image.
+"""script to predict the segmentation results and calculate surrogate biomarkers of a given testing dataset using the docker image.
 
-This script allows users to execute the whole-pipline using docker image.
+This script allows users to execute the whole pipeline using the docker image.
 """
 
 import os
@@ -13,11 +13,15 @@ from src.LFBNet.utilities.compute_surrogate_features import ComputesTMTVsDmaxFro
 
 
 def main():
-    """ Predicts tumor segmentation results and calculate associated quantitative metrics on a given testing dataset
+    """ Predicts tumor segmentation results and calculates associated quantitative metrics on a given testing dataset.
+
+
 
     This function receives the path directory to the testing dataset that contains the PET images. It predicts the
-    segmentation results and save as .nii files. It then calculates the surrogate metabolic tumor volume (sTMTV) and
-    surrogate dissemination feature (sDmax) and save as csv or xls file.
+
+    segmentation results and saves them as .nii files. It then calculates the surrogate metabolic tumor volume (sTMTV) and
+
+    surrogate dissemination feature (sDmax) and saves it as CSV or Xls file.
 
     Acronyms:
         PET: Nifti format of [18]F-FDG PET images in SUV unit.

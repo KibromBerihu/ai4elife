@@ -51,7 +51,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Installation](#installation)
 - [Usage](#-usage)
   - Easy use: testing mode
-  - Transfer learning: development
+  - Transfer learning mode: development
 - [Results](#-results)
 - [FAQ](#-faq)
 - [Citations](#-citations)

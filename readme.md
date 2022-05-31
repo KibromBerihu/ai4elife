@@ -91,7 +91,7 @@ A typical data directory might look like:
 
  **Note:** the folder name for PET images should be `PET` and for the ground truth `GT`. All other folder and subfolder names could be anything. 
  
- ### ⚙️Installation
+ ### ⚙️<a name="installation"> Installation
 
 Please read the documentation before opening an issue!
 

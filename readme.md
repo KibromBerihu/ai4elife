@@ -50,8 +50,8 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [ Required folder structure](#-required-folder-structure)
 - [Installation](#installation)
 - [Usage](#-usage)
-  - [Easy use: testing mode]
-  - [Transfer learning: development]
+  - Easy use: testing mode
+  - Transfer learning: development
 - [Results](#-results)
 - [FAQ](#-faq)
 - [Citations](#-citations)

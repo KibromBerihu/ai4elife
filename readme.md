@@ -50,13 +50,13 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [ Required folder structure](#-required-folder-structure)
 - [Installation](#installation)
 - [Usage](#-usage)
-  - [Easy use: testing mode](#easy-use-testing-modevirtual-brbr)
-  - [Transfer learning: development](#transfer-learning-mode-developmenttranserlearning)
+  - [Easy use: testing mode]
+  - [Transfer learning: development]
 - [Results](#-results)
 - [FAQ](#-faq)
 - [Citations](#-citations)
 - [Adapting LFBNet for other configurations or segmentation tasks](#-how-to-configure-an-extended-lfbnet-for-other-2d-based-medical-image-segmentation)
-- [Useful resources](#-useful-resources) 
+- [Useful resources](#useful-resources) 
 - [Acknowledgements](#-acknowledgments)
 
 ## 📁 Required folder structure
@@ -216,7 +216,7 @@ LFBNet is provided as a configurable network for 2D image-based multi-class and 
 Please refer to [THIS](%5BDocumentation/configure.md) guide. 
 
 
-### 💁️ Useful resources
+### 💁️<a name="useful-resources"> Useful resources
 - The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
 
 ### 🙏 Acknowledgments

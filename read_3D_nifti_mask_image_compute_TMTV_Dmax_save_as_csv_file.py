@@ -24,6 +24,9 @@ from skimage.measure import label,  regionprops
 from skimage import data, util
 from scipy.spatial import  distance
 
+import pathlib
+
+
 
 # function to write csv file
 def write_to_csv_file(array, output_path, file_name="csv"):
@@ -109,6 +112,6 @@ if __name__ == "__main__":
     # We assume the .nii file name and the folder name are the same
     parser = argparse.ArgumentParser(description="script to read nii files and compute TMTV and Dmax")
     parser.add_argument("--input_dir", dest='input_dir',  type=pathlib.Path, help="Input directory path to .nii files")
-    parser.add_argument("--output_dir", dest='output_dir',  type=str, help='output directory path')
+    parser.add_argument("--output_dir", dest='output_dir', type=pathlib.Path, help='output directory path')
     args = parser.parse_args()
     read_nii_mask_save_csv_tmtv_dmax(args.input_dir, args.output_dir)

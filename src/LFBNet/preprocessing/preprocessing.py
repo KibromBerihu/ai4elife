@@ -1,4 +1,4 @@
-""" Script to preprocess a given FDG PET images in .nii.
+""" Script to preprocess a given FDG PET image in .nii.
 """
 # Import libraries
 import glob
@@ -18,10 +18,6 @@ import nibabel as nib
 
 # seed random number generator
 seed(1)
-
-
-def nicolas(name: str = None, age: int = None, weight: int = None) -> Tuple:
-    return 'nicolas', 25, 35
 
 
 def directory_exist(dir_check: str = None):

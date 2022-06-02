@@ -48,7 +48,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Summary](#introduction)
 - [Table of Contents](#table-of-contents)
 - [ Required folder structure](#-required-folder-structure)
-- [Installation](#-installation)
+- [Installation](#installation)
 - [Usage](#-usage)
   - Easy use: testing mode
   - Transfer learning mode: development
@@ -91,11 +91,9 @@ A typical data directory might look like:
 
  **Note:** the folder name for PET images should be `PET` and for the ground truth `GT`. All other folder and subfolder names could be anything. 
 
- 
-
-## ⚙️ Installation  
+## ⚙️  Installation <a name="installation"> </a>
   
-Please read the documentation before opening an issue!
+Please read the documentation before opening an issue! 
 
 <font size='4'> Download/clone code to your local computer </font> 
 
@@ -105,11 +103,12 @@ Please read the documentation before opening an issue!
     - Alternatively:
       1. go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.
  
+      
 
 
-   1) <font size ="4">To install in virtual environment </font> <br/><br>    
+   1) <font size ="4">To install in virtual environment </font>  
        1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) regarding how to create a virtual environment using 
-         conda.  <br/><br>
+         conda.  
        2) Open terminal or Anaconda Prompt <br/><br>
        3) Change the working directory to the downloaded and unzipped ai4elife folder <br/><br>
        4) Create the virtual environment provided in the requirements.yaml: 
@@ -131,7 +130,6 @@ Please read the documentation before opening an issue!
    2) <font size ="4"> Using docker image: building image from docker file </font> <br/><br>
       
       1) Assuming you already have [docker desktop](https://www.docker.com/) installed. For more information, kindly refer to [THIS](https://docs.docker.com/). 
-      <br/><br>
       
       2) Make sure to change the directory to the downloaded and unzipped ai4elife directory. 
       <br/><br>

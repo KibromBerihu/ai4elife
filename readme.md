@@ -50,8 +50,8 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [ Required folder structure](#-required-folder-structure)
 - [Installation](#installation)
 - [Usage](#-usage)
-  - Easy use: testing mode
-  - Transfer learning mode: development
+  - [Easy use: testing mode](#easy-use-testing-mode)
+  - [Transfer learning mode: development](#transfer-learning-mode-developmenttranserlearning)
 - [Results](#-results)
 - [FAQ](#-faq)
 - [Citations](#-citations)
@@ -136,7 +136,7 @@ Please read the documentation before opening an issue!
       3) Run the following commands to create a docker image with the name <DockerImageName>:<Tag>'
       <br/><br>
 
-         1. `docker build -t <DockerImageName>:<Tag> .`
+         `docker build -t <DockerImageName>:<Tag> .`
 
  
 ## 💻 Usage
@@ -144,19 +144,23 @@ This package has two usages.
 The first one is to segment tumor regions and then calculate the surrogate biomarkers such as sTMTV and sDmax on the given test dataset using the pre-trained weights, named as "easy use case". 
 The second use case is transfer learning or retraining from scratch on your own dataset.
 
-### [Easy use: testing mode](#virtual) <br/><br>
+ 
+### [Easy use: testing mode](#virtual) <a name="easy-use-testing-mode"> </a> 
+
 Please make sure that you organized your data as in the [Required folder structure](#directory). 
 1. **Option 1:** Using the virtual environment: <br/><br>
-    1. Change to the source directory: `ai4elife/' <br/><br>
-    2. Activate the virtual environment: `conda activate myenv` <br/><br>
-    3. Run: `python test_env.py  --input_dir path/to/input/data  --output_dir path/to/output` 
+    1. Change to the source directory: `cd  path/to/ai4elife/` <br/><br>
+    2. Activate the virtual environment:    `conda activate myenv` <br/><br>
+ 
+    3. Run:  `python test_env.py  --input_dir path/to/input/data  --output_dir path/to/output` 
    <br/><br>
 2. **Option 2:** Using the docker: <br/><br>
    
     `run_docker_image.bat path/to/input_data path/to/output_data  <docker_image_name> <Tag>  <container_id>`
 
-
-### [Transfer learning mode: development](#transerlearning)
+ 
+### [Transfer learning mode: development](#transerlearning) <a name="transfer-learning-mode-developmenttranserlearning"> </a>  
+ 
 To apply transfer learning by using the trained weights or training the deep learning method from scratch,
 we recommend following the virtual environment-based [installation](#virtual) option.
 
@@ -165,7 +169,7 @@ Run the following commands for activating the virtual enviroment, and then train
 1. Activate the virtual environment:
    `conda activate myenv`
 <br/><br>
-2. To [train](#train) the model from a new dataset, change to the ai4elife/src directory: <br/><br>
+2. To [train](#train) the model from a new dataset, change to the `ai4elife/src` directory: <br/><br>
    
    `python train.py --input_dir path/to/training_validation_data  --data_id <unique_data_name> --task <train>`
 <br/><br>

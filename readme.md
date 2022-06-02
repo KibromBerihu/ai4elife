@@ -106,7 +106,6 @@ Please read the documentation before opening an issue!
  
 
  1) To install in virtual environment <br/><br>
- 
        1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) regarding how to create a virtual environment using conda.  <br/><br>
        2) Open terminal or Anaconda Prompt <br/><br>
  

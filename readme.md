@@ -121,7 +121,7 @@ Please read the documentation before opening an issue!
       <br/><br>
        6) Verify the virtual environment was installed correctly:
    
-            `cond info --envs`
+            `conda info --envs`
       
            <font size='2'>  If you can see the virtual environment with a name 'myenv', well done, the virtual environment and dependencies are installed successfully. </font>
 

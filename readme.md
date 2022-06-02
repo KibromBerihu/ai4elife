@@ -91,36 +91,21 @@ A typical data directory might look like:
 
  **Note:** the folder name for PET images should be `PET` and for the ground truth `GT`. All other folder and subfolder names could be anything. 
  
- ### ⚙️<a name="installation"> Installation
 
-Please read the documentation before opening an issue!
-
-
-<font size='4'> Download/clone code to your local computer </font>
-
-
-    - git clone https://github.com/KibromBerihu/ai4elife.git
-   
-    - Alternatively:
-      1. go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.
- 
-
- 1) To install in virtual environment <br/><br>
-       1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) regarding how to create a virtual environment using conda.  <br/><br>
+   1) <font size ="4"> To install in virtual environment </font> <br/><br>
+      
+       1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) regarding how to create a virtual environment using 
+         conda.  <br/><br>
        2) Open terminal or Anaconda Prompt <br/><br>
- 
        3) Change the working directory to the downloaded and unzipped ai4elife folder <br/><br>
- 
        4) Create the virtual environment provided in the requirements.yaml: 
       
            `conda env create -f environment.yml`
-       <br/><br>
- 
+      <br/><br>
        5) If you choose to use a virtual environment, the virtual environment must be activated before executing any script:
       
            `conda activate myenv`
-       <br/><br>
- 
+      <br/><br>
        6) Verify the virtual environment was installed correctly:
    
             `conda info --envs`

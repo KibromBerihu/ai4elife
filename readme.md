@@ -48,7 +48,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 - [Summary](#introduction)
 - [Table of Contents](#table-of-contents)
 - [ Required folder structure](#-required-folder-structure)
-- [Installation](#installation)
+- [Installation](#-installation)
 - [Usage](#-usage)
   - Easy use: testing mode
   - Transfer learning mode: development
@@ -90,10 +90,24 @@ A typical data directory might look like:
 
 
  **Note:** the folder name for PET images should be `PET` and for the ground truth `GT`. All other folder and subfolder names could be anything. 
+
  
 
-   1) <font size ="4"> To install in virtual environment </font> <br/><br>
-      
+## ⚙️ Installation  
+  
+Please read the documentation before opening an issue!
+
+<font size='4'> Download/clone code to your local computer </font> 
+
+
+    - git clone https://github.com/KibromBerihu/ai4elife.git
+   
+    - Alternatively:
+      1. go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.
+ 
+
+
+   1) <font size ="4">To install in virtual environment </font> <br/><br>    
        1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) regarding how to create a virtual environment using 
          conda.  <br/><br>
        2) Open terminal or Anaconda Prompt <br/><br>
@@ -108,9 +122,10 @@ A typical data directory might look like:
       <br/><br>
        6) Verify the virtual environment was installed correctly:
    
-            `conda info --envs`
+            `cond info --envs`
       
            <font size='2'>  If you can see the virtual environment with a name 'myenv', well done, the virtual environment and dependencies are installed successfully. </font>
+
          
 
    2) <font size ="4"> Using docker image: building image from docker file </font> <br/><br>
@@ -125,7 +140,8 @@ A typical data directory might look like:
 
          1. `docker build -t <DockerImageName>:<Tag> .`
 
-### 💻 Usage
+ 
+## 💻 Usage
 This package has two usages. 
 The first one is to segment tumor regions and then calculate the surrogate biomarkers such as sTMTV and sDmax on the given test dataset using the pre-trained weights, named as "easy use case". 
 The second use case is transfer learning or retraining from scratch on your own dataset.
@@ -163,7 +179,7 @@ Run the following commands for activating the virtual enviroment, and then train
 [configuration](architectural_and_parameter_search.md). Briefly, you can apply different features, kernel size in the convolution, depth of the neural networks, and other hyperparameters values. The segmentation 
 model is designed in easy configurable mode. 
    
-### 📈 Results
+## 📈 Results
 
 - Two intermediate folders will be generated.
 
@@ -187,24 +203,24 @@ model is designed in easy configurable mode.
 - Surrogate biomarkers (sTMTV and sDmax) will be automatically calculated and saved as an EXCEL file inside the folder output/*.csv. Two EXCEL files will be saved. The first one constitutes computed surrogate biomarkers calculated from the segmentation masks predicted from AI with an indicator `predicted` in the file name. The second EXCEL file would constitute the surrogate biomarkers computed from the reference segmentation masks (i.e., ground truth) from the expert (if available) with an indicator `ground_truth` in the file name. In addition to the `predicted` and `ground truth` indicator names, the CSV file's name also constitutes an automatically generated month, year, and the processing time.
 
 
-### 🙋 FAQ
+## 🙋 FAQ
 Please visit the [FAQ](https://github.com/KibromBerihu/ai4elife/blob/main/documentation/FAQ.md) samples before creating an issue. 
 
-### 📖 Citations 
+## 📖 Citations 
 Please cite the following paper when using this:
 
     K. B. Girum, L. Rebaud A.S. Cottereau et. al., "18F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients," in The Journal of Nuclear Medicine.
 
 
-### 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 
+## 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 
 LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.
 Please refer to [THIS](%5BDocumentation/configure.md) guide. 
 
 
-### 💁️<a name="useful-resources"> Useful resources
+## 💁️<a name="useful-resources"> Useful resources
 - The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
 
-### 🙏 Acknowledgments
+## 🙏 Acknowledgments
 We thank you [the reader].  
 
 

@@ -105,10 +105,10 @@ Please read the documentation before opening an issue!
       1. go to https://github.com/KibromBerihu/ai4elife.git >> [Code] >> Download ZIP file.
  
 
-   1) To install in virtual environment <br/><br>
+   1) To install in virtual environment 
       
        1) We recommend you to create virtual environment. please refer to [THIS](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html) regarding how to create a virtual environment using 
-         conda.  <br/><br>
+         conda.  
        2) Open terminal or Anaconda Prompt <br/><br>
        3) Change the working directory to the downloaded and unzipped ai4elife folder <br/><br>
        4) Create the virtual environment provided in the requirements.yaml: 

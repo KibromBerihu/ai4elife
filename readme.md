@@ -31,7 +31,7 @@ Tested on an independent testing cohort (174 patients), the AI yielded a 0.86 me
 features can be used to predict the OS and PFS in DLBCL patients, equivalent to the expert-driven 3D features. 
 
 ***Deep learning Model:*** 
-We adapted the deep learning-based robust medical image segmentation method [LFB-Net](https://doi.org/10.1109/TMI.2021.3060497).
+We adapted the deep learning-based robust medical image segmentation method [LFBNet](https://doi.org/10.1109/TMI.2021.3060497).
 Please refer to the [paper](https://doi.org/10.1109/TMI.2021.3060497) 
 for details, and cite the paper if you use lfbnet for your research. 
 
@@ -42,7 +42,7 @@ The whole pipeline, including the generation of PET MIPs, automatic segmentation
 for a use case on personal/desktop computers or clusters. It could highly facilitate the analysis of PET MIP-based features 
 leading to the potential translation of these features into clinical practice. 
 
-Please refer to the paper for details and cite the paper if you use LFB-Net for your research. 
+Please refer to the paper for details and cite the paper if you use LFBNet for your research. 
 
 ### Table of contents  
 - [Summary](#introduction)
@@ -208,7 +208,7 @@ model is designed in easy configurable mode.
 
 
 ## 🙋 FAQ
-Please visit the [FAQ](https://github.com/KibromBerihu/ai4elife/blob/main/documentation/FAQ.md) samples before creating an issue. 
+Please visit the [FAQ](./documentation/FAQ.md) samples before creating an issue. 
 
 ## 📖 Citations 
 Please cite the following paper when using this:
@@ -218,11 +218,11 @@ Please cite the following paper when using this:
 
 ## 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 
 LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.
-Please refer to [THIS](%5BDocumentation/configure.md) guide. 
+Please refer to [THIS](./documentation/tutorial/jupyter_notebook_step_by_step_illustration.ipynb) guide. 
 
 
 ## 💁️<a name="useful-resources"> </a> Useful resources
-- The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration.ipynb](documents/illustration.md).
+- The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration.ipynb](./documentation/tutorial/jupyter_notebook_step_by_step_illustration.ipynb).
 
 ## 🙏 Acknowledgments
 We thank you [the reader].  

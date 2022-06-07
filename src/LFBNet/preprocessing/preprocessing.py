@@ -118,7 +118,7 @@ def get_pet_gt(current_dir: str = None):
 
     # Get pet image
     # if "pet" in str()
-    pet_path = str(current_dir) + "/PET/"
+    pet_path = str(current_dir) + "/pet/"
     pet = get_nii_files(pet_path)
 
     # Get gt image
@@ -133,8 +133,10 @@ def get_pet_gt(current_dir: str = None):
     return [pet, gt]
 
 
-def resize_nii_to_desired_spacing(data: int = None, data_spacing: Tuple[float] = None, desired_spacing: ndarray = None,
-        interpolation_order_value: int = None):
+def resize_nii_to_desired_spacing(
+        data: int = None, data_spacing: Tuple[float] = None, desired_spacing: ndarray = None,
+        interpolation_order_value: int = None
+        ):
     """ resizes a given input data into the desired spacing using the specified interpolation order.
 
     Args:
@@ -169,13 +171,17 @@ def resize_nii_to_desired_spacing(data: int = None, data_spacing: Tuple[float] =
     if len(data_spacing) == 3 and len(np.squeeze(data).shape) == 3:  # 3D input image
         new_z_resolution = np.ceil(data.shape[2] * (data_spacing[2] / desired_spacing_z))
 
-        # resize to new iamge resolution
-        image_resized = resize(data, (new_x_resolution, new_y_resolution, new_z_resolution),
-                               order=interpolation_order_value, preserve_range=True, anti_aliasing=False)
+        # resize to new image resolution
+        image_resized = resize(
+            data, (new_x_resolution, new_y_resolution, new_z_resolution), order=interpolation_order_value,
+            preserve_range=True, anti_aliasing=False
+            )
 
     else:  # if the given input image is 2D
-        image_resized = resize(data, (new_x_resolution, new_y_resolution), order=interpolation_order_value,
-                               preserve_range=True, anti_aliasing=False)
+        image_resized = resize(
+            data, (new_x_resolution, new_y_resolution), order=interpolation_order_value, preserve_range=True,
+            anti_aliasing=False
+            )
 
     return image_resized
 
@@ -272,8 +278,10 @@ def crop_nii_to_desired_resolution(data: ndarray = None, cropped_resolution: Lis
     return data
 
 
-def save_nii_images(image: List[ndarray] = None, affine: ndarray = None, path_save: str =None, identifier: str = None,
-        name: List[str] = None):
+def save_nii_images(
+        image: List[ndarray] = None, affine: ndarray = None, path_save: str = None, identifier: str = None,
+        name: List[str] = None
+        ):
     """ Save given images into the given directory. If no saving directory is given it will save into
     ./data/predicted/' directory.
 
@@ -380,9 +388,10 @@ def transform_coordinate_space(modality_1, modality_2, mode='nearest'):
 
 
 # read PET and GT images
-def read_pet_gt_resize_crop_save_as_3d_andor_mip(data_path: str = None, data_name: str = None, saving_dir: str = None,
-        save_3D: bool = False, crop: bool = True, output_resolution: List[int] = None,
-        desired_spacing: List[float] = None, generate_mip: bool = False):
+def read_pet_gt_resize_crop_save_as_3d_andor_mip(
+        data_path: str = None, data_name: str = None, saving_dir: str = None, save_3D: bool = False, crop: bool = True,
+        output_resolution: List[int] = None, desired_spacing: List[float] = None, generate_mip: bool = False
+        ):
     """ Read pet and ground truth images from teh input data path. It also apply resize, and cropping operations.
 
     Args:
@@ -402,7 +411,7 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(data_path: str = None, data_nam
     if output_resolution is not None:
         # output resized and cropped image resolution
         rows, columns, depths = output_resolution
-    else:  # defualt values
+    else:  # default values
         # output resized and cropped image resolution=
         output_resolution = [128, 128, 256]
 
@@ -422,7 +431,7 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(data_path: str = None, data_nam
     # check if the directory exist
     directory_exist(data_path)
 
-    # by default the processed 3d and 2D MIP will be saved into the 'data' subdirectory, respectively with name tages
+    # by default the processed 3d and 2D MIP will be saved into the 'data' subdirectory, respectively with name tags
     # as '_default_3d_dir' and '_default_MIP_dir'
 
     def create_directory(directory_to_create: list):
@@ -511,8 +520,9 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(data_path: str = None, data_nam
             if data_name == "remarc":
                 gt = np.flip(gt, axis=-1)
 
-            gt = resize_nii_to_desired_spacing(gt, data_spacing=res_pet, desired_spacing=desired_spacing,
-                                               interpolation_order_value=0)
+            gt = resize_nii_to_desired_spacing(
+                gt, data_spacing=res_pet, desired_spacing=desired_spacing, interpolation_order_value=0
+                )
 
         pet = np.asanyarray(pet.dataobj)
         # if the given image has stacked as channel example one image in remarc : 175x175x274x2
@@ -521,16 +531,17 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(data_path: str = None, data_nam
 
         # generate_mip_show(pet, gt, identifier=str(image_name))
 
-        pet = resize_nii_to_desired_spacing(pet, data_spacing=res_pet, desired_spacing=desired_spacing,
-                                            interpolation_order_value=3)
+        pet = resize_nii_to_desired_spacing(
+            pet, data_spacing=res_pet, desired_spacing=desired_spacing, interpolation_order_value=3
+            )
 
         '''
         if most data are with brain images at the very top, avoid cropping the brain images,instead crop from bottom
         or the leg part
         '''
-        if gt is not  None:
+        if gt is not None:
             if str(data_name).lower() == 'lnh':
-                # flip left to right to mach lnhdata to remarc
+                # flip left to right to mach lnh data to remarc
                 gt = np.flip(gt, axis=-1)
 
         crop_zero_above_brain = True
@@ -564,25 +575,37 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(data_path: str = None, data_nam
             # output image affine
             affine = np.diag([desired_spacing[0], desired_spacing[1], desired_spacing[2], 1])
             if gt is not None:
-                save_nii_images([pet, gt], affine=affine, path_save=saving_dir_3d, identifier=str(image_name),
-                                name=['pet', 'gt'])
+                save_nii_images(
+                    [pet, gt], affine=affine, path_save=saving_dir_3d, identifier=str(image_name),
+                    name=['pet', 'ground_truth']
+                    )
             else:
                 save_nii_images([pet], affine=affine, path_save=saving_dir_3d, identifier=str(image_name), name=['pet'])
 
         # generate Sagittal and coronal MIPs
         if generate_mip:
-            for sagittal_coronal in range(2):  # assuming sagittal is on axis 0, and coronal is on axis 1
+            for sagittal_coronal in range(2):
                 pet_mip = generate_mip_from_3D(pet, mip_axis=int(sagittal_coronal))  # pet mip
+
+                # assuming sagittal is on axis 0, and coronal is on axis 1
+                if sagittal_coronal == 0:  # sagittal
+                    naming_ = "sagittal"
+                elif sagittal_coronal == 1:
+                    naming_ = "coronal"
 
                 if gt is not None:
                     gt_mip = generate_mip_from_3D(gt, mip_axis=int(sagittal_coronal))  # gt mip
                     # save the generated MIP
-                    save_nii_images([pet_mip, gt_mip], affine, path_save=saving_dir_mip, identifier=str(image_name),
-                                    name=['pet_' + str(sagittal_coronal), 'gt_' + str(sagittal_coronal)])
+                    save_nii_images(
+                        [pet_mip, gt_mip], affine, path_save=saving_dir_mip, identifier=str(image_name),
+                        name=['pet_' + str(naming_), 'ground_truth_' + str(naming_)]
+                        )
                 else:
                     # save the generated MIP
-                    save_nii_images([pet_mip], affine, path_save=saving_dir_mip, identifier=str(image_name),
-                                    name=['pet_' + str(sagittal_coronal)])
+                    save_nii_images(
+                        [pet_mip], affine, path_save=saving_dir_mip, identifier=str(image_name),
+                        name=['pet_' + str(naming_)]
+                        )
     return saving_dir_mip
 
 
@@ -592,10 +615,9 @@ if __name__ == '__main__':
     # input_path = r"F:\Data\Remarc\REMARC/"
     # data_ = "remarc"
     #
-    # input_path = r"F:\Data\Vienna\No_ground_truth/"
-    # data_ = "vienna"
-    saving_dir_mip = read_pet_gt_resize_crop_save_as_3d_andor_mip(data_path=input_path, data_name=data_,
-                                                                  saving_dir=None, save_3D=True, crop=True,
-                                                                  output_resolution=[128, 128, 256],
-                                                                  desired_spacing=None, generate_mip=True)
-
+    input_path = r"F:\Data\Vienna\No_ground_truth/"
+    data_ = "LNH"
+    saving_dir_mip = read_pet_gt_resize_crop_save_as_3d_andor_mip(
+        data_path=input_path, data_name=data_, saving_dir=None, save_3D=True, crop=True,
+        output_resolution=[128, 128, 256], desired_spacing=None, generate_mip=True
+        )

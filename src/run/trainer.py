@@ -561,7 +561,7 @@ class NetworkTrainer:
             predicted = self.model.combine_and_train.predict([input_image, feedback_latent])
             save_nii_images(
                 [predicted, ground_truth, input_image], identifier=str(case_name),
-                name=[case_name + "_prd", case_name + "_gt", case_name + "_img"], path_save=self.predicted_directory
+                name=[case_name + "_predicted", case_name + "_ground_truth", case_name + "_image"], path_save=self.predicted_directory
                 )
         else:
 
@@ -570,7 +570,7 @@ class NetworkTrainer:
                 predicted = self.model.combine_and_train.predict([input_image, feedback_latent])
                 save_nii_images(
                     [predicted, ground_truth, input_image], identifier=str(case_name),
-                    name=[case_name + "_prd", case_name + "_gt", case_name + "_img"], path_save=self.predicted_directory
+                    name=[case_name + "_predicted", case_name + "_ground_truth", case_name + "_image"], path_save=self.predicted_directory
                     )
 
         return all_loss_dice, dice_sen_sp
@@ -806,8 +806,8 @@ class ModelTesting:
         predicted = self.model.combine_and_train.predict([input_image, feedback_latent])
         save_nii_images(
             [predicted, ground_truth, input_image], identifier=str(case_name),
-            name=[case_name + "_prd", case_name + "_gt", case_name + "_img"],
-            path_save= os.path.join(str(self.predicted_dir) , 'predicted_data')
+            name=[case_name + "_predicted", case_name + "_ground_truth", case_name + "_pet"],
+            path_save= os.path.join(str(self.predicted_dir), 'predicted_data')
             )
 
         return all_loss_dice
@@ -832,7 +832,8 @@ class ModelTesting:
 
         predicted = self.model.combine_and_train.predict([input_image, feedback_latent])
         save_nii_images(
-            image=[predicted, input_image], identifier=str(case_name), name=[case_name + "_prd", case_name + "_img"],
+            image=[predicted, input_image], identifier=str(case_name), name=[case_name + "_predicted",
+                                                                             case_name + "_pet"],
             path_save= os.path.join(str(self.predicted_dir), 'predicted_data')
             )
 

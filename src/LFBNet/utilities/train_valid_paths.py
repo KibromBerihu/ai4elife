@@ -16,7 +16,7 @@ import random
 random.seed(7)
 
 
-def write_it_to_csv(data, name='file', dir_name=None, columns_ = None):
+def write_it_to_csv(data, name='file', dir_name=None, columns_=None):
     """
 
     Args:
@@ -42,7 +42,7 @@ def write_it_to_csv(data, name='file', dir_name=None, columns_ = None):
         if columns_ is None:
             columns = ['column_' + str(i) for i in range(data.shape[1])]
         else:
-            columns =[clm for clm in columns_]
+            columns = [clm for clm in columns_]
 
             if len(columns) < data.shape[1]:
                 add_column_name = ['column_' + str(i) for i in range(abs(data.shape[1] - len(columns)))]
@@ -101,7 +101,8 @@ def get_training_and_validation_ids_from_csv(path):
 def get_train_valid_ids_from_folder(path_train_valid: dict = None, ratio_valid_data: int = 0.25):
     """
     gets the path to the train and validation data as dictionary, with dictionary name "train" and "valid".
-    if only the train or valid is given it considers random separation of training and validation ids with ratio_valid_data.
+    if only the train or valid is given it considers random separation of training and validation ids with
+    ratio_valid_data.
     The default value is 25%
 
     :param path_train_valid: dictionary of path to training data, with key word "train"
@@ -153,14 +154,16 @@ def get_train_valid_ids_from_folder(path_train_valid: dict = None, ratio_valid_d
     # save it for later reference
 
     print(train_test)
-    write_it_to_csv(train_test, name='train_valid_ids',
-                    columns_ =['train','valid'])
+    write_it_to_csv(
+        train_test, name='train_valid_ids', columns_=['train', 'valid']
+        )
     return train_id, valid_id
 
 
-def get_output_or_create_folder_name(model: str, task: str = None, trainer: str = None, pans: str = None,
-        fold: int = None,
-        processed_data_directory: str = None):
+def get_output_or_create_folder_name(
+        model: str, task: str = None, trainer: str = None, pans: str = None, fold: int = None,
+        processed_data_directory: str = None
+        ):
     """
     Retrieve the output directory for the LFB-net model given in the input parameters
     :param processed_data_directory:
@@ -270,6 +273,5 @@ def read_csv_train_valid_index(path_, csv_identifier: str = None):
 
 if __name__ == '__main__':
     # print("traind_valid_path_finder ")
-    # path_ = r"F:\LFB_Net\data\csv\training_validation_indexs\remarc/"
+    path_ = r"F:\LFB_Net\data\csv\training_validation_indexs\remarc/"
     xy = read_csv_train_valid_index(path_)
-

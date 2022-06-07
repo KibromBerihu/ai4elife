@@ -10,6 +10,8 @@ import numpy as np
 from numpy import ndarray
 from copy import deepcopy
 
+import logging
+logging.getLogger('tensorflow').disabled = True
 import tensorflow as tf
 from keras.models import Model
 from keras.layers import Conv2D

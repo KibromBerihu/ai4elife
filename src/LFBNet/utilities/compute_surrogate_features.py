@@ -16,7 +16,7 @@ import nibabel as nib
 random.seed(7)
 
 
-class ComputesTMTVsDmaxFromnii:
+class ComputesTMTVsDmaxFromNii:
     """ computes the surrogate features from given 2D coronal and sagittal masks (grounnd truths).
 
     Args:
@@ -26,7 +26,7 @@ class ComputesTMTVsDmaxFromnii:
     Returns:
         Returns a saved csv files with the computed surrogate biomarkers.
     """
-    def __init__(self, data_path: str = None, get_identifier: str = "prd"):
+    def __init__(self, data_path: str = None, get_identifier: str = "predicted"):
 
         self.data_path = data_path
 
@@ -54,14 +54,14 @@ class ComputesTMTVsDmaxFromnii:
                 Returns the computed surrogate MTV and dissemination along the height (z) and width (xy) of the image.
 
             """
-            prof_xy, prof_z, stmtv = ComputesTMTVsDmaxFromnii.num_white_pixels(mask_to_compute_feature_on.copy())
-            sdmax_xy = ComputesTMTVsDmaxFromnii.compute_surrogate_dissemination(prof_xy, percentile=[2, 98])
-            sdmax_z = ComputesTMTVsDmaxFromnii.compute_surrogate_dissemination(prof_z, percentile=[2, 98])
+            prof_xy, prof_z, stmtv = ComputesTMTVsDmaxFromNii.num_white_pixels(mask_to_compute_feature_on.copy())
+            sdmax_xy = ComputesTMTVsDmaxFromNii.compute_surrogate_dissemination(prof_xy, percentile=[2, 98])
+            sdmax_z = ComputesTMTVsDmaxFromNii.compute_surrogate_dissemination(prof_z, percentile=[2, 98])
             return stmtv, sdmax_xy, sdmax_z
 
         # store all calculated features:
         case_name_sagittal_coronal_axial_x_y_z_features = [
-            ['PID', 'sTMTV_sagittal', 'sTMTV_coronal', "sTMTV_(mm)", 'Sagittal_xy', 'Sagittal_z', 'Coronal_xy',
+            ['PID', 'sTMTV_sagittal', 'sTMTV_coronal', "sTMTV_(mm\u00b2)", 'Sagittal_xy', 'Sagittal_z', 'Coronal_xy',
              'Coronal_z', "sDmax_(mm)", "sDmax_(mm)_euclidean", 'X', 'Y', 'Z']]
 
         for n, id in tqdm(enumerate(case_ids), total=(len(case_ids))):
@@ -70,7 +70,7 @@ class ComputesTMTVsDmaxFromnii:
 
             # if there is any ids that ends with _0 or _1, the coronal and sagittal images are saved separately,
             # otherwise not. sagittal with '_o' and coronal with '_1'.
-            saved_sagittal_coronal_seprately = any([True for case_id in case_ids_img_name if "_0" in case_id])
+            saved_sagittal_coronal_separately = any([True for case_id in case_ids_img_name if "_sagittal" in case_id])
 
             # dictionary to store the values for sagittal and coronal features
             sagittal = dict(smtv=0, sdmax_xy=0, sdmax_z=0)
@@ -80,13 +80,13 @@ class ComputesTMTVsDmaxFromnii:
                 # get number of files ending with the identifier, i.e., predicted (prd) or ground truth (gt).
                 if str(self.get_identifier) in str(read_image):
                     read_image_path = os.path.join(img_folder, read_image)
-                    mask, _ = ComputesTMTVsDmaxFromnii.get_image(read_image_path)
+                    mask, _ = ComputesTMTVsDmaxFromNii.get_image(read_image_path)
 
-                    if saved_sagittal_coronal_seprately:
+                    if saved_sagittal_coronal_separately:
                         # We have sagittal and coronal images saved separately.
-                        if "_0" in str(read_image):  # sagittal
+                        if "_sagittal" in str(read_image):  # sagittal
                             sagittal['smtv'], sagittal['sdmax_xy'], sagittal['sdmax_z'] = get_features(mask)
-                        elif "_1" in str(read_image):  # coronal
+                        elif "_coronal" in str(read_image):  # coronal
                             coronal['smtv'], coronal['sdmax_xy'], coronal['sdmax_z'] = get_features(mask)
                     else:
                         # sagittal and coronal given as one nifti image.
@@ -98,7 +98,7 @@ class ComputesTMTVsDmaxFromnii:
                                 coronal['smtv'], coronal['sdmax_xy'], coronal['sdmax_z'] = get_features(mask_)
 
             # combine the sagittal and coronal features, and compute them in physical space.
-            sTMTV, sDmax_abs, sDmax_sqrt = ComputesTMTVsDmaxFromnii.compute_features_in_physical_space(
+            sTMTV, sDmax_abs, sDmax_sqrt = ComputesTMTVsDmaxFromNii.compute_features_in_physical_space(
                 sagittal, coronal
                 )
             # add the given patient's features into all dataset.
@@ -109,7 +109,7 @@ class ComputesTMTVsDmaxFromnii:
                 )
 
         # save the computed features into csv file
-        ComputesTMTVsDmaxFromnii.write_it_to_csv(
+        ComputesTMTVsDmaxFromNii.write_it_to_csv(
             data=case_name_sagittal_coronal_axial_x_y_z_features, dir_name=self.data_path,
             identifier=self.get_identifier
             )
@@ -176,7 +176,7 @@ class ComputesTMTVsDmaxFromnii:
             Returns the number of pixels across each row of the image in profile_axis_z
         and number of pixels across each column of the image in profile axis_xy.
         """
-        input_image = ComputesTMTVsDmaxFromnii.threshold(input_image)
+        input_image = ComputesTMTVsDmaxFromNii.threshold(input_image)
 
         profile_axis_Z, profile_axis_xy = [], []
         for index in range(input_image.shape[0]):
@@ -248,11 +248,11 @@ class ComputesTMTVsDmaxFromnii:
         voxel_size = mask.header.get_zooms()
 
         mask = np.asanyarray(mask.dataobj)
-        mask = ComputesTMTVsDmaxFromnii.threshold(mask)
+        mask = ComputesTMTVsDmaxFromNii.threshold(mask)
         return mask, voxel_size
 
     @staticmethod
-    def write_it_to_csv(data: ndarray = None, dir_name: str = None, identifier: str = "prd"):
+    def write_it_to_csv(data: ndarray = None, dir_name: str = None, identifier: str = "predicted"):
         """ Write the surrogate feature in xls files
 
         Args:
@@ -290,5 +290,5 @@ class ComputesTMTVsDmaxFromnii:
 
 if __name__ == '__main__':
     data_pth = r"E:\ai4elife\data\predicted/"
-    cls = ComputesTMTVsDmaxFromnii(data_path=data_pth, get_identifier="prd")
+    cls = ComputesTMTVsDmaxFromNii(data_path=data_pth, get_identifier="predicted")
     cls.compute_and_save_surrogate_features()

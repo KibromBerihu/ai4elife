@@ -21,7 +21,7 @@ set CONTAINERID=%5
 echo '[8] Running the docker with container id: %CONTAINERID% ....'
 
 docker run -it --rm --name %CONTAINERID%^
-    -v %input_dir%:/input_data ^
+    -v %input_dir%:/input ^
     -v %output_dir%:/output ^
     %docker_image_name%:%docker_tag% ^
 

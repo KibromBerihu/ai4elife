@@ -5,11 +5,13 @@ This script allows users to execute the whole pipeline using the docker image.
 
 import os
 import sys
+import warnings
+warnings.filterwarnings('ignore')
 
 from src.LFBNet.utilities import train_valid_paths
 from src.LFBNet.preprocessing import preprocessing
 from src.run import trainer, parse_argument
-from src.LFBNet.utilities.compute_surrogate_features import ComputesTMTVsDmaxFromnii
+from src.LFBNet.utilities.compute_surrogate_features import ComputesTMTVsDmaxFromNii
 
 
 def main():
@@ -52,7 +54,7 @@ def main():
     """
 
     # Path to the parent/main directory. Please read readme.md for how to organize your files.
-    input_dir = "/input_data"
+    input_dir = "/input"
 
     # parameters to set
     dataset_name = 'data'
@@ -80,11 +82,11 @@ def main():
 
     print("\n\n Computing the surrogate biomarkers ... \n\n")
     for identifier, data_path in zip(
-            ["prd", "gt"], [os.path.join(preprocessing_data_dir, "predicted_data"),
+            ["predicted", "ground_truth"], [os.path.join(preprocessing_data_dir, "predicted_data"),
                             os.path.join(preprocessing_data_dir, "data_default_MIP_dir")]
             ):
         try:
-            csv_file = ComputesTMTVsDmaxFromnii(data_path=data_path, get_identifier=identifier)
+            csv_file = ComputesTMTVsDmaxFromNii(data_path=data_path, get_identifier=identifier)
             csv_file.compute_and_save_surrogate_features()
         except:
             continue

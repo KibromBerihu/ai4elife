@@ -4,7 +4,7 @@
 
 ## *[20202_5_5] Update: AI4eLIFE: Easing local image feature extraction using AI.*
 
-#### <a name="introduction"> [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine (JNM), 2022.** 
+#### <a name="introduction"> </a> [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine (JNM), 2022.** 
 
 ***Introduction:***
 Baseline 18F-FDG PET/CT image-driven features have shown predictive values in Diffuse Large B-cell lymphoma (DLBCL)
@@ -62,7 +62,7 @@ Please refer to the paper for details and cite the paper if you use LFB-Net for 
 ## 📁 Required folder structure
 Please provide all data in a single directory. The method automatically analyses all given data batch-wise. 
 
-To run the program, you only need PET scans (CT is not required) of patients in nifty format, where the PET images are coded in SUV units. If your images have already been segmented, you can also provide the mask (ground truth (GT)) as a binary image in nifty format. Suppose you provided ground truth (GT) data; it will print the dice, sensitivity, and specificity metrics between the reference segmentation by the expert (i.e., GT) and the predicted segmentation by the model. If the ground truth is NOT AVAILABLE, the model will only predict the segmentation. 
+To run the program, you only need PET scans (CT is not required) of patients in nifty format, where the PET images are coded in SUV units. If your images have already been segmented, you can also provide the mask (ground truth (gt)) as a binary image in nifty format. Suppose you provided ground truth (gt) data; it will print the dice, sensitivity, and specificity metrics between the reference segmentation by the expert (i.e., gt) and the predicted segmentation by the model. If the ground truth is NOT AVAILABLE, the model will only predict the segmentation. 
 
 A typical data directory might look like:
 
@@ -70,26 +70,26 @@ A typical data directory might look like:
     |-- main_folder                                             <-- The main folder or all patient folders (Give it any NAME)
 
     |      |-- parent folder (patient_folder_1)             <-- Individual patient folder name with unique id
-    |           |-- PET                                     <-- The PET folder for the .nii suv file
-                     | -- name.nii or name.nii.gz            <-- The PET image in nifti format (Name can be anything)
-    |           |-- GT                                      <-- The corresponding ground truth folder for the .nii file  
-                     | -- name.nii or name.nii.gz            <-- The ground truth (GT) image in nifti format (Name can be anything)
+    |           |-- pet                                     <-- The pet folder for the .nii suv file
+                     | -- name.nii or name.nii.gz            <-- The pet image in nifti format (Name can be anything)
+    |           |-- gt                                      <-- The corresponding ground truth folder for the .nii file  
+                     | -- name.nii or name.nii.gz            <-- The ground truth (gt) image in nifti format (Name can be anything)
     |      |-- parent folder (patient_folder_2)             <-- Individual patient folder name with unique id
-    |          |-- PET                                     <-- The PET folder for the .nii suv file
-                    | -- name.nii or name.nii.gz            <-- The PET image in nifti format (Name can be anything)
-    |         |-- GT                                      <-- The corresponding ground truth folder for the .nii file  
-                    | -- name.nii or name.nii.gz            <-- The ground truth (GT) image in nifti format (Name can be anything)
+    |          |-- gt                                     <-- The pet folder for the .nii suv file
+                    | -- name.nii or name.nii.gz            <-- The pet image in nifti format (Name can be anything)
+    |         |-- pet                                      <-- The corresponding ground truth folder for the .nii file  
+                    | -- name.nii or name.nii.gz            <-- The ground truth (gt) image in nifti format (Name can be anything)
     |           .
     |           .
     |           .
     |      |-- parent folder (patient_folder_N)             <-- Individual patient folder name with unique id
-    |           |-- PET                                     <-- The PET folder for the .nii suv file
-                    | -- name.nii or name.nii.gz            <-- The PET image in nifti format (Name can be anything)
-    |           |-- GT                                      <-- The corresponding ground truth folder for the .nii file  
-                    | -- name.nii or name.nii.gz            <-- The ground truth (GT) image in nifti format (Name can be anything)
+    |           |-- pet                                     <-- The pet folder for the .nii suv file
+                    | -- name.nii or name.nii.gz            <-- The pet image in nifti format (Name can be anything)
+    |           |-- gt                                      <-- The corresponding ground truth folder for the .nii file  
+                    | -- name.nii or name.nii.gz            <-- The ground truth (gt) image in nifti format (Name can be anything)
 
 
- **Note:** the folder name for PET images should be `PET` and for the ground truth `GT`. All other folder and subfolder names could be anything. 
+ **Note:** the folder name for PET images should be `pet` and for the ground truth `gt`. All other folder and sub-folder names could be anything. 
 
 ## ⚙️  Installation <a name="installation"> </a>
   
@@ -147,34 +147,36 @@ The second use case is transfer learning or retraining from scratch on your own 
  
 ### [Easy use: testing mode](#virtual) <a name="easy-use-testing-mode"> </a> 
 
-Please make sure that you organized your data as in the [Required folder structure](#directory). 
+Please make sure that you organized your data as in the [Required folder structure](#-required-folder-structure). 
 1. **Option 1:** Using the virtual environment: <br/><br>
     1. Change to the source directory: `cd  path/to/ai4elife/` <br/><br>
     2. Activate the virtual environment:    `conda activate myenv` <br/><br>
  
-    3. Run:  `python test_env.py  --input_dir path/to/input/data  --output_dir path/to/output` 
+    3. Run:  `python test_env.py  --input_dir path/to/input/  --output_dir path/to/output/` 
    <br/><br>
 2. **Option 2:** Using the docker: <br/><br>
    
-    `run_docker_image.bat path/to/input_data path/to/output_data  <docker_image_name> <Tag>  <container_id>`
-
+    Option 1:`run_docker_image.bat path/to/input path/to/output  <docker_image_name> <Tag>  <container_id>`
+    <br/><br>
+    Option 2: `docker run -it --rm --name <container_id> -v path/to/input/:/input -v path/to/output/:/output <docker_image_name>:<Tag>`
+    <br/><br>
  
 ### [Transfer learning mode: development](#transerlearning) <a name="transfer-learning-mode-developmenttranserlearning"> </a>  
  
 To apply transfer learning by using the trained weights or training the deep learning method from scratch,
-we recommend following the virtual environment-based [installation](#virtual) option.
+we recommend following the virtual environment-based [installation](#installation) option.
 
-Run the following commands for activating the virtual enviroment, and then training, validating, and testing of the proposed model on your own dataset.
+Run the following commands for activating the virtual environment, and then training, validating, and testing of the proposed model on your own dataset.
 
 1. Activate the virtual environment:
    `conda activate myenv`
 <br/><br>
 2. To [train](#train) the model from a new dataset, change to the `ai4elife/src` directory: <br/><br>
    
-   `python train.py --input_dir path/to/training_validation_data  --data_id <unique_data_name> --task <train>`
+   `python train.py --input_dir path/to/training_validation_data/  --data_id <unique_data_name> --task <train>`
 <br/><br>
 3. To [evaluate](#evaluate) on the validation data: <br/><br>
-    `python train.py --input_dir path/to/validation_data  --data_id <unique_data_name> --task <valid>`
+    `python train.py --input_dir path/to/validation_data/  --data_id <unique_data_name> --task <valid>`
 <br/><br>
 
 **Note:** You can also **configure** the deep learning model for **parameter and architectural search**. Please refer to the documentation
@@ -192,7 +194,7 @@ model is designed in easy configurable mode.
   - The generated corresponding sagittal and coronal images are saved in the folder name       
 ``../output/data_default_mip_dir``.
   
-  - For simplicity, the coronal PET MIP images are `PET_1.nii`, sagittal as `PET_0.nii`, and corresponding ground truth as `gt_1.nii`, and `gt_0.nii`, respectively.
+  - For simplicity, the coronal PET MIP images are `pet_coronal.nii`, sagittal as `pet_sagittal.nii`, and corresponding ground truth as `ground_truth_coronal.nii`, and `ground_truth_sagittal.nii`, respectively.
   
   - NOTE: if there is no ground truth, it will only generate the coronal and sagittal PET MIPs. 
   Kindly check if these generated files are in order.
@@ -219,8 +221,8 @@ LFBNet is provided as a configurable network for 2D image-based multi-class and 
 Please refer to [THIS](%5BDocumentation/configure.md) guide. 
 
 
-## 💁️<a name="useful-resources"> Useful resources
-- The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration..ipynb](documents/illustration.md).
+## 💁️<a name="useful-resources"> </a> Useful resources
+- The detailed step-by-step for preprocessing, dataset split into training and validation cohorts, and visualization of results are demonstrated in the [jupyter_notebook_step_by_step_illustration.ipynb](documents/illustration.md).
 
 ## 🙏 Acknowledgments
 We thank you [the reader].  

@@ -12,7 +12,7 @@ import sys
 from src.LFBNet.utilities import train_valid_paths
 from src.LFBNet.preprocessing import preprocessing
 from src.run import trainer, parse_argument
-from src.LFBNet.utilities.compute_surrogate_features import ComputesTMTVsDmaxFromnii
+from src.LFBNet.utilities.compute_surrogate_features import ComputesTMTVsDmaxFromNii
 
 
 def main():
@@ -58,7 +58,7 @@ def main():
 
     # If input directory path is not given use the default "/input_data"
     if input_dir is None:
-        input_dir = "/input_data"
+        input_dir = "/input"
         if not os.path.exists(input_dir):
             os.mkdir(input_dir)
 
@@ -93,11 +93,11 @@ def main():
 
     print("\n\n Computing the surrogate biomarkers ... \n\n")
     for identifier, data_path in zip(
-            ["prd", "gt"], [os.path.join(preprocessing_data_dir, "predicted_data"),
+            ["predicted", "ground_truth"], [os.path.join(preprocessing_data_dir, "predicted_data"),
                             os.path.join(preprocessing_data_dir, "data_default_MIP_dir")]
             ):
         try:
-            csv_file = ComputesTMTVsDmaxFromnii(data_path=data_path, get_identifier=identifier)
+            csv_file = ComputesTMTVsDmaxFromNii(data_path=data_path, get_identifier=identifier)
             csv_file.compute_and_save_surrogate_features()
         except:
             continue

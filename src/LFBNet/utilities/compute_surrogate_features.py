@@ -1,4 +1,4 @@
-"""This script computes the surrogate feautes of the MIP images such as sTMTV and sDmax.
+"""This script computes the surrogate features of the MIP images such as sTMTV and sDmax.
 """
 import os
 import numpy as np
@@ -17,7 +17,7 @@ random.seed(7)
 
 
 class ComputesTMTVsDmaxFromNii:
-    """ computes the surrogate features from given 2D coronal and sagittal masks (grounnd truths).
+    """ computes the surrogate features from given 2D coronal and sagittal masks (ground truths).
 
     Args:
         data_path: path to the sagittal and coronal masks.
@@ -26,6 +26,7 @@ class ComputesTMTVsDmaxFromNii:
     Returns:
         Returns a saved csv files with the computed surrogate biomarkers.
     """
+
     def __init__(self, data_path: str = None, get_identifier: str = "predicted"):
 
         self.data_path = data_path
@@ -92,9 +93,9 @@ class ComputesTMTVsDmaxFromNii:
                         # sagittal and coronal given as one nifti image.
                         for sagittal_coronal in range(2):
                             mask_ = mask[sagittal_coronal]
-                            if sagittal_coronal == 0: # sagittal
+                            if sagittal_coronal == 0:  # sagittal
                                 sagittal['smtv'], sagittal['sdmax_xy'], sagittal['sdmax_z'] = get_features(mask_)
-                            else: # coroanl
+                            else:  # coroanl
                                 coronal['smtv'], coronal['sdmax_xy'], coronal['sdmax_z'] = get_features(mask_)
 
             # combine the sagittal and coronal features, and compute them in physical space.
@@ -117,10 +118,10 @@ class ComputesTMTVsDmaxFromNii:
         return case_name_sagittal_coronal_axial_x_y_z_features
 
     @staticmethod
-    def compute_features_in_physical_space(sagittal: ndarray = None, coronal: ndarray = None,
-                                           voxel_size: ndarray = [4.0, 4.0, 4.0]
-                                           ):
-        """ Compute features in physical space. Basically multiply the given TMV or dissimination by the voxel space.
+    def compute_features_in_physical_space(
+            sagittal: dict = None, coronal: dic = None, voxel_size=None
+            ):
+        """ Compute features in physical space. Basically multiply the given TMV or dissemination by the voxel space.
 
         Args:
             sagittal: sagittal view features.
@@ -132,6 +133,8 @@ class ComputesTMTVsDmaxFromNii:
 
         """
         # add the surrogate volume of the coronal and sagittal images.
+        if voxel_size is None:
+            voxel_size = [4.0, 4.0, 4.0]
         sTMTV = (sagittal['smtv'] + coronal['smtv']) * voxel_size[0] * voxel_size[2]
 
         # add the dissemination of the coronal and sagittal images. Absolute distance.
@@ -139,11 +142,13 @@ class ComputesTMTVsDmaxFromNii:
                     voxel_size[0] + coronal['sdmax_z'] * voxel_size[2]
 
         # add the dissemination of the coronal and sagittal images. Square distance.
-        sDmax_ecludian = np.sqrt(np.power(sagittal['sdmax_xy'] * voxel_size[0], 2) +
-                                 np.power(sagittal['sdmax_z'] * voxel_size[2], 2) +
-                                 np.power(coronal['sdmax_xy'] * voxel_size[0], 2) +
-                                 np.power(coronal['sdmax_z'] * voxel_size[2], 2)
-                                 )
+        sDmax_ecludian = np.sqrt(
+            np.power(sagittal['sdmax_xy'] * voxel_size[0], 2) + np.power(
+                sagittal['sdmax_z'] * voxel_size[2], 2
+                ) + np.power(
+                coronal['sdmax_xy'] * voxel_size[0], 2
+                ) + np.power(coronal['sdmax_z'] * voxel_size[2], 2)
+            )
 
         return sTMTV, sDmax_abs, sDmax_ecludian
 
@@ -166,7 +171,8 @@ class ComputesTMTVsDmaxFromNii:
 
     @staticmethod
     def num_white_pixels(input_image):
-        """ Computes the surrogate volume of the mask, and the projection profile of the non zero values into horizontal (z)
+        """ Computes the surrogate volume of the mask, and the projection profile of the non-zero values into
+        horizontal (z)
         and vertical profiles (xy).
 
         Args:
@@ -178,26 +184,29 @@ class ComputesTMTVsDmaxFromNii:
         """
         input_image = ComputesTMTVsDmaxFromNii.threshold(input_image)
 
-        profile_axis_Z, profile_axis_xy = [], []
+        # remove small nodes < 4.8 cm2
+        input_image = ComputesTMTVsDmaxFromNii.remove_outliers(input_image, minimum_cc_sum=30)
+
+        profile_axis_z, profile_axis_xy = [], []
         for index in range(input_image.shape[0]):
             profile_axis_xy.append(np.sum(input_image[index, :] > 0))
         for index in range(input_image.shape[1]):
-            profile_axis_Z.append(np.sum(input_image[:, index] > 0))
+            profile_axis_z.append(np.sum(input_image[:, index] > 0))
 
         smtv = np.sum(input_image > 0)
 
-        return profile_axis_xy, profile_axis_Z, smtv
+        return profile_axis_xy, profile_axis_z, smtv
 
     @staticmethod
     def remove_outliers(input_image: ndarray = None, minimum_cc_sum: float = None):
-        """ Remove outliers. Outliers are considered to be small regions (less thatn the given minimum_cc_sum).
+        """ Remove outliers. Outliers are considered to be small regions (less than the given minimum_cc_sum).
 
         Args:
             input_image: input mask.
             minimum_cc_sum: threshold value to remove tumor size less than this value.
 
         Returns:
-            Returns maks with outliers or small indpendent regions of tumor removed.
+            Returns mask with outliers or small independent regions of tumor removed.
 
         """
         binary_mask = input_image.copy()
@@ -205,16 +214,16 @@ class ComputesTMTVsDmaxFromNii:
         # Let us now remove all the small regions, i.e., less than the specified mm.
         refined_mask = input_image.copy()
         for get_label in range(num_labels):
-            if np.sum(refined_mask[labelled_mask == get_label]) < minimum_cc_sum:
-                refined_mask[labelled_mask == label] = 0
+            if np.sum(refined_mask[labelled_mask == get_label]) <= minimum_cc_sum:
+                refined_mask[labelled_mask == get_label] = 0
         return refined_mask
 
     @staticmethod
-    def compute_surrogate_dissemination(input: ndarray = None, percentile: ndarray = None):
+    def compute_surrogate_dissemination(input_surrogate: List[ndarray] = None, percentile: List = None):
         """ calculate the dissemination.
 
         Args:
-            data: input mask image.
+            input_surrogate: input mask image.
             percentile: percentile of the tumor regions to consider for the dissemination computation.
 
         Returns:
@@ -222,10 +231,10 @@ class ComputesTMTVsDmaxFromNii:
 
         """
         # if the input image has tumor regions, foreground regions.
-        if np.asarray(input).any() > 0:
+        if np.asarray(input_surrogate).any() > 0:
             # get the positions where there is tumor region
-            ls = [index for index, element in enumerate(input) if element != 0]
-            # distance is the difference between the first and the last indexs plus one. s
+            ls = [index for index, element in enumerate(input_surrogate) if element != 0]
+            # distance is the difference between the first and the last index plus one. s
             n = int(ls[-1] - ls[0] + 1)
             distance = np.absolute(np.ceil(n * percentile[0] / 100) - np.ceil(n * percentile[1] / 100))
         else:
@@ -252,7 +261,7 @@ class ComputesTMTVsDmaxFromNii:
         return mask, voxel_size
 
     @staticmethod
-    def write_it_to_csv(data: ndarray = None, dir_name: str = None, identifier: str = "predicted"):
+    def write_it_to_csv(data: List = None, dir_name: str = None, identifier: str = "predicted"):
         """ Write the surrogate feature in xls files
 
         Args:

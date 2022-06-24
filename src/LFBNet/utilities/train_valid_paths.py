@@ -177,7 +177,7 @@ def get_output_or_create_folder_name(
 
     assert model in ['2D', "3D"]
 
-    # check if the directory to the proceseed data is given
+    # check if the directory to the processed data is given
     directory_exist(processed_data_directory)
     # if it exists
     data_dir = processed_data_directory

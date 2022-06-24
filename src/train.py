@@ -128,7 +128,7 @@ def main():
 
         # train or test on the given input arguments
         trainer_params = dict(folder_preprocessed_train=dir_mip, folder_preprocessed_valid=dir_mip,
-                              ids_to_read_train=train_ids, ids_to_read_valid=valid_ids, training=task,
+                              ids_to_read_train=train_ids, ids_to_read_valid=valid_ids, task=task,
                               predicted_directory=output_dir)
 
         network_run = trainer.NetworkTrainer(**trainer_params)
@@ -149,7 +149,7 @@ def main():
             train_ids, valid_ids = train_valid_paths.get_train_valid_ids_from_folder(path_train_valid=path_train_valid)
 
         trainer_params = dict(folder_preprocessed_train=dir_mip, folder_preprocessed_valid=dir_mip,
-                              ids_to_read_train=train_ids, ids_to_read_valid=valid_ids, training=task,
+                              ids_to_read_train=train_ids, ids_to_read_valid=valid_ids, task=task,
                               predicted_directory=output_dir, save_predicted=True)
 
         network_run = trainer.NetworkTrainer(**trainer_params)

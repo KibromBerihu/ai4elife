@@ -213,7 +213,7 @@ Please visit the [FAQ](./documentation/FAQ.md) samples before creating an issue.
 ## 📖 Citations 
 Please cite the following paper when using this:
 
-    K. B. Girum, L. Rebaud A.S. Cottereau et. al., "18F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients," in The Journal of Nuclear Medicine.
+    Girum KB, Rebaud L, Cottereau A-S, et al. 18 F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients. J Nucl Med. June 2022:jnumed.121.263501.
 
 
 ## 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 

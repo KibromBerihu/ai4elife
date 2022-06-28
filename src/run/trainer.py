@@ -51,7 +51,7 @@ from src.LFBNet.network_architecture import lfbnet
 from src.LFBNet.losses import losses
 from src.LFBNet.preprocessing import save_nii_images
 from src.LFBNet.utilities import train_valid_paths
-
+from src.LFBNet.postprocessing import remove_outliers_in_sagittal
 # choose cuda gpu
 CUDA_VISIBLE_DEVICES = 1
 os.environ["CUDA_VISIBLE_DEVICES"] = "1"
@@ -804,6 +804,7 @@ class ModelTesting:
                     'sensitivity': binary.sensitivity(predicted, ground_truth)}
 
         predicted = self.model.combine_and_train.predict([input_image, feedback_latent])
+        predicted = remove_outliers_in_sagittal(predicted)
         save_nii_images(
             [predicted, ground_truth, input_image], identifier=str(case_name),
             name=[case_name + "_predicted", case_name + "_ground_truth", case_name + "_pet"],
@@ -831,6 +832,7 @@ class ModelTesting:
         feedback_latent = self.model.feedback_latent.predict(predicted)  # feedback: hf
 
         predicted = self.model.combine_and_train.predict([input_image, feedback_latent])
+        predicted = remove_outliers_in_sagittal(predicted)
         save_nii_images(
             image=[predicted, input_image], identifier=str(case_name), name=[case_name + "_predicted",
                                                                              case_name + "_pet"],

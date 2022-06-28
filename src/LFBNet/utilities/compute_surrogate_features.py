@@ -119,7 +119,7 @@ class ComputesTMTVsDmaxFromNii:
 
     @staticmethod
     def compute_features_in_physical_space(
-            sagittal: dict = None, coronal: dic = None, voxel_size=None
+            sagittal: dict = None, coronal: dict = None, voxel_size=None
             ):
         """ Compute features in physical space. Basically multiply the given TMV or dissemination by the voxel space.
 

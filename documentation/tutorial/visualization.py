@@ -38,6 +38,7 @@ kmf = KaplanMeierFitter()
 from medpy.metric import binary
 
 import ntpath
+from scipy.ndimage import label
 
 
 def superimpose_segmentation_images(pet_gt_prd_display, file_name, logzscore=None):
@@ -175,8 +176,6 @@ def read_predicted_images(path: str = None):
         if len(pred):
             pred[pred>0.5] =1
             pred[pred<0.5] = 0
-
-        print(pet.shape)
 
         for coronal_sagittal in range(2):
             if len(gt) and len(pred):

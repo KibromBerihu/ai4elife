@@ -2,7 +2,7 @@
  [![Docker build passing](https://img.shields.io/badge/docker%20build-passing-brightgreen)](https://github.com/KibromBerihu/ai4elife/blob/main/Dockerfile) 
  [![Downloads](https://img.shields.io/github/downloads/KibromBerihu/ai4elife/total.svg)]() 
 
-## *[20202_06_24] Update: AI4eLIFE: Easing local image feature extraction using AI.*
+## *[2022_06_24] Update: AI4eLIFE: Easing local image feature extraction using AI.*
 
 #### <a name="introduction"> </a> [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine Jun 2022, jnumed.121.263501.** DOI: https://doi.org/10.2967/jnumed.121.263501 
 

@@ -2,9 +2,9 @@
  [![Docker build passing](https://img.shields.io/badge/docker%20build-passing-brightgreen)](https://github.com/KibromBerihu/ai4elife/blob/main/Dockerfile) 
 
 
-## *[2022_06_24] Update: AI4eLIFE: Easing local image feature extraction using AI.*
+## *AI4eLIFE: Easing local image feature extraction using AI.*
 
-#### <a name="introduction"> </a> [📑](https://github.com/KibromBerihu/LFBNet) 18F-FDG PET maximum intensity projections and artificial intelligence: **a win-win combination to easily measure prognostic biomarkers in DLBCL patients. Journal of Nuclear Medicine Jun 2022, jnumed.121.263501.** DOI: https://doi.org/10.2967/jnumed.121.263501 
+### <a name="introduction"> </a> [📑](https://jnm.snmjournals.org/content/early/2022/06/16/jnumed.121.263501) Repository for *fully automated tumor lesions segmentation in whole-body PET/CT images using data-centric artificial intelligence and fully automatically calculating the clinical endpoints.*
 
 ***Introduction:***
 Baseline 18F-FDG PET/CT image-driven features have shown predictive values in Diffuse Large B-cell lymphoma (DLBCL)
@@ -211,10 +211,13 @@ model is designed in easy configurable mode.
 Please visit the [FAQ](./documentation/FAQ.md) samples before creating an issue. 
 
 ## 📖 Citations 
-Please cite the following paper when using this:
-
-    Girum KB, Rebaud L, Cottereau A-S, et al. 18 F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients. J Nucl Med. June 2022:jnumed.121.263501.
-
+Please cite the following papers when using this:
+```
+Girum KB, Rebaud L, Cottereau A-S, et al. 18 F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients. J Nucl Med. June 2022:jnumed.121.263501. DOI: https://doi.org/10.2967/jnumed.121.263501 
+```
+```
+ Girum KB, Créhange G, Lalande A. Learning with context feedback loop for robust medical image segmentation. IEEE Transactions on Medical Imaging. 2021 Feb 19;40(6):1542-54. DOI: https://doi.org/10.1109/TMI.2021.3060497
+```
 
 ## 💭 How to configure an extended LFBNet for other 2D-based medical image segmentation? 
 LFBNet is provided as a configurable network for 2D image-based multi-class and single-class segmentations.

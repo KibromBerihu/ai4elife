@@ -4,7 +4,7 @@
 
 ## *AI4eLIFE: Easing local image feature extraction using AI.*
 
-### <a name="introduction"> </a> [📑](https://jnm.snmjournals.org/content/early/2022/06/16/jnumed.121.263501) Repository for *fully automated tumor lesions segmentation in whole-body PET/CT images using data-centric artificial intelligence and fully automatically calculating the clinical endpoints.*
+### <a name="introduction"> </a> [📑](https://jnm.snmjournals.org/content/early/2022/06/16/jnumed.121.263501) *Fully automated tumor lesions segmentation in whole-body PET/CT images using data-centric artificial intelligence and fully automatically calculating the clinical endpoints.*
 
 ***Introduction:***
 Baseline 18F-FDG PET/CT image-driven features have shown predictive values in Diffuse Large B-cell lymphoma (DLBCL)

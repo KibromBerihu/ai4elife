@@ -2,7 +2,7 @@
  [![Docker build passing](https://img.shields.io/badge/docker%20build-passing-brightgreen)](https://github.com/KibromBerihu/ai4elife/blob/main/Dockerfile) 
 
 
-## *AI4eLIFE: Easing local image feature extraction using AI.*
+## *AI4eLIFE: Artificial Intelligence for Efficient Learning-based Image Feature Extraction.*
 
 ### <a name="introduction"> </a> [📑](https://jnm.snmjournals.org/content/early/2022/06/16/jnumed.121.263501) *Fully automated tumor lesions segmentation in whole-body PET/CT images using data-centric artificial intelligence and fully automatically calculating the clinical endpoints.*
 

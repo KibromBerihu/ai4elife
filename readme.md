@@ -1,6 +1,10 @@
  [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) 
  [![Docker build passing](https://img.shields.io/badge/docker%20build-passing-brightgreen)](https://github.com/KibromBerihu/ai4elife/blob/main/Dockerfile) 
 
+# News!
+![image](https://user-images.githubusercontent.com/14540795/197578753-94d6e9aa-7a8f-4a61-9617-13e49d90da0e.JPG) 
+# 3D version (stay tuned!)
+
 
 ## *AI4eLIFE: Artificial Intelligence for Efficient Learning-based Image Feature Extraction.*
 

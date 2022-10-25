@@ -215,7 +215,7 @@ model is designed in easy configurable mode.
 Please visit the [FAQ](./documentation/FAQ.md) samples before creating an issue. 
 
 ## 📖 Citations 
-Please cite the following papers when using this:
+Please cite the following papers if you use this package for your research:
 ```
 Girum KB, Rebaud L, Cottereau A-S, et al. 18 F-FDG PET maximum intensity projections and artificial intelligence: a win-win combination to easily measure prognostic biomarkers in DLBCL patients. J Nucl Med. June 2022:jnumed.121.263501. DOI: https://doi.org/10.2967/jnumed.121.263501 
 ```

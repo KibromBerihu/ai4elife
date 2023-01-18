@@ -131,7 +131,7 @@ Please read the documentation before opening an issue!
 
          
 
-   2) <font size ="4"> Using docker image: building image from docker file </font> <br/><br>
+   2) <font size ="4"> Using docker image: building image from docker file [REPRODUCIBLE] </font> <br/><br>
       
       1) Assuming you already have [docker desktop](https://www.docker.com/) installed. For more information, kindly refer to [THIS](https://docs.docker.com/). 
       
@@ -151,7 +151,8 @@ The second use case is transfer learning or retraining from scratch on your own 
  
 ### [Easy use: testing mode](#virtual) <a name="easy-use-testing-mode"> </a> 
 
-Please make sure that you organized your data as in the [Required folder structure](#-required-folder-structure). 
+Please make sure that you organized your data as in the [Required folder structure](#-required-folder-structure).
+### For reproducibility and better accuracy, please use OPTION 2. 
 1. **Option 1:** Using the virtual environment: <br/><br>
     1. Change to the source directory: `cd  path/to/ai4elife/` <br/><br>
     2. Activate the virtual environment:    `conda activate myenv` <br/><br>

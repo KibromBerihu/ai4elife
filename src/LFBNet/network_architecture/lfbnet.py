@@ -31,8 +31,8 @@ if p not in sys.path:
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
 # local import
-from src.LFBNet.network_architecture.get_conv_blocks import StackedConvLayerABlock, UpConvLayer
-from src.LFBNet.losses.losses import LossMetric
+from LFBNet3D.src.LFBNet.network_architecture.get_conv_blocks import StackedConvLayerABlock, UpConvLayer
+from LFBNet3D.src.LFBNet.losses.losses import LossMetric
 
 
 # function to set/configure default parameters for lfbnet.
@@ -103,7 +103,7 @@ class LfbNet:
     """
 
     def __init__(self, input_image_shape: ndarray = None, num_output_class: int = 1, base_num_features: int = 32,
-            conv_config: dict = None, conv_kernel_sizes:int=3, default_skips: bool = True, num_layers: int = 4,
+            conv_config: dict = None, conv_kernel_sizes: int=3, default_skips: bool = True, num_layers: int = 4,
             use_skip: bool = True, num_classes: int = 1, decoder_input_shape=None, skipped_input=None,
             num_conv_per_block: int = 2):
         """ set parameters to configure LFBNet
@@ -141,11 +141,17 @@ class LfbNet:
         # add the at last the number of features : base_num_features * latent_dim_input_ratio in feature space
         self.latent_dim[-1] = int(base_num_features * latent_dim_input_ratio)
 
-        self.optimizer = tf.keras.optimizers.Adam(lr=3e-4)
+        #self.optimizer = tf.keras.optimizers.Adam(lr=3e-4)
+        optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=3e-4)
+        self.optimizer = optimizer
+
+
 
         # if conv_config is not given: take the default values
         if conv_config is None:
             self.conv_config = deepcopy(get_default_config())
+        else:
+            self.conv_config = conv_config
 
         self.base_num_features = base_num_features
 
@@ -175,6 +181,7 @@ class LfbNet:
             for stage in range(num_layers):
                 skipped_input.append(
                     [int(decoder_input_shape[0] * (2 ** stage)), int(decoder_input_shape[1] * (2 ** stage)),
+                     int(decoder_input_shape[2] * (2 ** stage)),
                      int(base_num_features * (2 ** (num_layers - (1 + stage))))])
 
         # print("skipped_connections setup")
@@ -346,7 +353,7 @@ class LfbNet:
             # decrease the number of features per block:  (self.num_decoder_stage-decoder_stage)
             num_output_features = int(self.base_num_features * (2 ** (self.num_layers - (2 + decoder_stage))))
             current_up_conv = UpConvLayer(current_up_conv, num_output_features=num_output_features,
-                                          conv_upsampling="2D").Up_conv_layer()
+                                          conv_upsampling=self.conv_config["2D_3D"]).Up_conv_layer()
             # Need skipp connections:
             if self.conv_config['merging_strategy'] is not None:
                 skipped_ = skip_input[decoder_stage]
@@ -406,7 +413,7 @@ class LfbNet:
 
             # up convolution block
             current_up_conv = UpConvLayer(current_up_conv, num_output_features=num_output_features,
-                                          conv_upsampling="2D").Up_conv_layer()
+                                          conv_upsampling=self.conv_config["2D_3D"]).Up_conv_layer()
 
             # convolution blocks
             current_up_conv = StackedConvLayerABlock(current_up_conv, num_output_features, conv_config=self.conv_config,
@@ -434,8 +441,12 @@ class LfbNet:
 
 if __name__ == '__main__':
     print("default config")
-    props = get_default_config()
-    model = LfbNet()
+    random_data = np.random.random((128, 128, 256))
+    # Expand dimensions to match expected input shape for the model
+    input_data = np.expand_dims(random_data, axis=-1)
+
+    props = get_default_config(dimension=3)
+    model = LfbNet(input_image_shape=np.asarray(input_data.shape), conv_config=props)
     print("network summary \n")
 
 

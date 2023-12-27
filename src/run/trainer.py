@@ -64,7 +64,7 @@ K.set_image_data_format('channels_last')
 
 
 def default_training_parameters(
-        num_epochs: int = 5000, batch_size: int = 16, early_stop: int = None, fold_number: int = None,
+        num_epochs: int = 4, batch_size: int = 4, early_stop: int = None, fold_number: int = None,
         model_name_save: List[str] = None, loss: str = None, metric: str = None
         ) -> dict:
     """ Configure default parameters for training.
@@ -204,16 +204,23 @@ class NetworkTrainer:
         self.save_all = save_predicted
         self.predicted_directory = predicted_directory
         # load the lfb_network architecture
-        self.model = lfbnet.LfbNet()
+        conv_config = lfbnet.get_default_config(dimension=3)
+        self.model = lfbnet.LfbNet(input_image_shape=np.asarray([64, 64, 64, 1]), conv_config=conv_config)
         self.task = task
 
         # forward network decoder
 
         # latent feedback at zero time: means no feedback from feedback network
         self.latent_dim = self.model.latent_dim
-        self.h_at_zero_time = np.zeros(
-            (int(self.config_trainer['batch_size']), int(self.latent_dim[0]), int(self.latent_dim[1]),
-             int(self.latent_dim[2])), np.float32
+        if conv_config["2D_3D"] == '2D':
+            self.h_at_zero_time = np.zeros(
+                (int(self.config_trainer['batch_size']), int(self.latent_dim[0]), int(self.latent_dim[1]),
+                 int(self.latent_dim[2])), np.float32
+            )
+        elif conv_config["2D_3D"] == '3D':
+            self.h_at_zero_time = np.zeros(
+                (int(self.config_trainer['batch_size']), int(self.latent_dim[0]), int(self.latent_dim[1]),
+                 int(self.latent_dim[2]), int(self.latent_dim[3])), np.float32
             )
 
     @staticmethod
@@ -505,8 +512,9 @@ class NetworkTrainer:
         # latent  feedback variable h0
         # replace the first number of batches with the number of input images from the first channel
         h0_input = np.zeros(
-            (len(input_image), int(self.latent_dim[0]), int(self.latent_dim[1]), int(self.latent_dim[2])), np.float32
-            )
+            (len(input_image), int(self.latent_dim[0]), int(self.latent_dim[1]),
+             int(self.latent_dim[2]), int(self.latent_dim[3])), np.float32
+        )
 
         # step 0:
         # Loss and dice on the validation of the forward system

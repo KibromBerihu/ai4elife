@@ -229,8 +229,7 @@ def crop_nii_to_desired_resolution(data: ndarray = None, cropped_resolution: Lis
     except:
         pass
 
-    # if cropped_resolution is not None:
-    if cropped_resolution is None:
+    if cropped_resolution is not None:
         cropped_resolution = [128, 128, 256]
 
     print("\n Initial data size \t Cropped data size ")
@@ -457,7 +456,7 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(
     #
     # # If the saving directory is given, a sub folder for the processed 3d and 2D MIP will be created
     # else:
-    data_3d = str(data_name) + "_default_3d_dir"
+    data_3d = str(data_name) + "_default_3d_dir_"
     data_mip = str(data_name) + "_default_MIP_dir"
     saving_dir_3d = os.path.join(saving_dir, data_3d)
     saving_dir_mip = os.path.join(saving_dir, data_mip)
@@ -607,7 +606,7 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(
                         [pet_mip], affine, path_save=saving_dir_mip, identifier=str(image_name),
                         name=['pet_' + str(naming_)]
                         )
-    return saving_dir_mip if generate_mip else saving_dir_3d
+    return saving_dir_mip
 
 
 # Read .nii files using itk

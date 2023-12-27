@@ -20,6 +20,7 @@ Please refer to the requirements.yml or requirements.txt files for the required 
 anaconda virtual environment is recommended to runt the script.
 
 e.g. python train.py  --input_dir path/to/input/data --task [train or valid]
+python train.py --input_dir ../data/hecktor_nii_cropped/ --task train
 
 By K.B. Girum
 """
@@ -41,7 +42,7 @@ def main():
     preprocess data, generate MIP, and train and validate.
 
      :parameter:
-           -- input_dir [path_to_pet_images]
+           --input_dir [path_to_pet_images]
            -- dataset_name [unique_dataset_name]
            -- output_dir [path_to_save_predicted_values] [optional]
            -- task test # testing model of the model [Optional]
@@ -78,10 +79,7 @@ def main():
 
     # output directory to save
     if args.output_dir:  # if given
-        output_dir = os.path.join(args.output_dir, 'predicted')
-        os.makedirs(output_dir, exist_ok=True)
-        preprocessing_dir = os.path.join(args.output_dir, 'preprocessed')
-        os.makedirs(preprocessing_dir, exist_ok=True)
+        output_dir = args.output_dir
     else:
         # if not given it will create under the folder "../../data/  str(dataset_name) + 'default_3d_dir'
         output_dir = '../data/predicted'  # directory to the MIP
@@ -91,13 +89,13 @@ def main():
         if not os.path.exists(output_dir):
             os.mkdir(output_dir)
 
-        # processed directory:
-        preprocessing_dir = '../data/preprocessed'  # directory to the MIP
-        if not os.path.exists('../data'):
-            os.mkdir('../data')
+    # processed directory:
+    preprocessing_dir = '../data/preprocessed'  # directory to the MIP
+    if not os.path.exists('../data'):
+        os.mkdir('../data')
 
-        if not os.path.exists(preprocessing_dir):
-            os.mkdir(preprocessing_dir)
+    if not os.path.exists(preprocessing_dir):
+        os.mkdir(preprocessing_dir)
 
     # default output data spacing
     desired_spacing = [4.0, 4.0, 4.0]
@@ -110,7 +108,7 @@ def main():
 
     # preprocessing stage:
     preprocessing_params = dict(data_path=input_dir, data_name=dataset_name, saving_dir=preprocessing_dir, save_3D=True,
-    output_resolution=[64, 64, 64], desired_spacing=desired_spacing, generate_mip=False)
+    output_resolution=[128, 128, 256], desired_spacing=desired_spacing, generate_mip=True)
 
     dir_mip = preprocessing.read_pet_gt_resize_crop_save_as_3d_andor_mip(**preprocessing_params)
 

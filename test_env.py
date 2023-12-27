@@ -58,13 +58,13 @@ def main():
 
     # If input directory path is not given use the default "/input_data"
     if input_dir is None:
-        input_dir = "/input"
+        input_dir = "data/input"
         if not os.path.exists(input_dir):
             os.mkdir(input_dir)
 
     # if output path is not given in the argument, create "/output"
     if preprocessing_data_dir is None:
-        preprocessing_data_dir = "/output"
+        preprocessing_data_dir = "data/output"
         if not os.path.exists(preprocessing_data_dir):
             os.mkdir(preprocessing_data_dir)
 
@@ -105,5 +105,5 @@ def main():
 
 # check
 if __name__ == '__main__':
-    print("\n Running the integrated framework for testing use case... \n\n")
+    # print("\n Running the integrated framework for testing use case... \n\n")
     main()

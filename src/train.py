@@ -63,6 +63,7 @@ def main():
 
     # get input and output data directories
     input_dir = args.input_dir
+    # print(f"==========={input_dir}")
     train_valid_paths.directory_exist(input_dir)  # CHECK: check if the input directory has files
 
     # data identifier, or name
@@ -102,14 +103,17 @@ def main():
     # STEP 1:  read the raw .nii files in suv and resize, crop in 3D form, generate MIP, and save
     # get the directory path to the generated and saved MIPS, if it already exists, go for training or testing
     dir_mip = []
+    dir_3D = []
     # path to the training and validation data
     path_train_valid = dict(train=None, test=None)
 
     # preprocessing stage:
     preprocessing_params = dict(data_path=input_dir, data_name=dataset_name, saving_dir=preprocessing_dir, save_3D=True,
-    output_resolution=[128, 128, 256], desired_spacing=desired_spacing, generate_mip=True)
+    output_resolution=[64, 64, 64], desired_spacing=desired_spacing, generate_mip=False)
+    ###out_resolu=[128,128,256]
+    # dir_mip = preprocessing.read_pet_gt_resize_crop_save_as_3d_andor_mip(**preprocessing_params)
+    dir_3D = preprocessing.read_pet_gt_resize_crop_save_as_3d_andor_mip(**preprocessing_params)
 
-    dir_mip = preprocessing.read_pet_gt_resize_crop_save_as_3d_andor_mip(**preprocessing_params)
 
     # training or validation/testing from the input argument task
     task = args.task  # true training and false testing or validation
@@ -123,11 +127,11 @@ def main():
             train_ids, valid_ids = trainer.get_training_and_validation_ids_from_csv(train_valid_ids_path_csv)
         else:
             # generate csv file for the validation and training data by dividing the data into training and validation
-            path_train_valid = dict(train=dir_mip)
+            path_train_valid = dict(train=dir_3D)
             train_ids, valid_ids = train_valid_paths.get_train_valid_ids_from_folder(path_train_valid=path_train_valid)
-
+        
         # train or test on the given input arguments
-        trainer_params = dict(folder_preprocessed_train=dir_mip, folder_preprocessed_valid=dir_mip,
+        trainer_params = dict(folder_preprocessed_train=dir_3D, folder_preprocessed_valid=dir_3D,
                               ids_to_read_train=train_ids, ids_to_read_valid=valid_ids, task=task,
                               predicted_directory=output_dir)
 
@@ -145,10 +149,10 @@ def main():
 
         else:
             # generate csv file for the validation and training data by dividing the data into training and validation
-            path_train_valid = dict(train=dir_mip)
+            path_train_valid = dict(train=dir_3D)
             train_ids, valid_ids = train_valid_paths.get_train_valid_ids_from_folder(path_train_valid=path_train_valid)
 
-        trainer_params = dict(folder_preprocessed_train=dir_mip, folder_preprocessed_valid=dir_mip,
+        trainer_params = dict(folder_preprocessed_train=dir_3D, folder_preprocessed_valid=dir_3D,
                               ids_to_read_train=train_ids, ids_to_read_valid=valid_ids, task=task,
                               predicted_directory=output_dir, save_predicted=True)
 

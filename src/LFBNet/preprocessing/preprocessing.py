@@ -230,7 +230,7 @@ def crop_nii_to_desired_resolution(data: ndarray = None, cropped_resolution: Lis
         pass
 
     if cropped_resolution is not None:
-        cropped_resolution = [128, 128, 256]
+        cropped_resolution = [64,64,64]#[54,54,54]#[128, 128, 256]
 
     print("\n Initial data size \t Cropped data size ")
     print(data.shape, "\t", end=" ")
@@ -392,7 +392,7 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(
         data_path: str = None, data_name: str = None, saving_dir: str = None, save_3D: bool = False, crop: bool = True,
         output_resolution: List[int] = None, desired_spacing: List[float] = None, generate_mip: bool = False
         ):
-    """ Read pet and ground truth images from teh input data path. It also apply resize, and cropping operations.
+    """ Read pet and ground truth images from the input data path. It also apply resize, and cropping operations.
 
     Args:
         data_path: directory to the raw 3D pet and ground truth .nii fies.
@@ -413,7 +413,7 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(
         rows, columns, depths = output_resolution
     else:  # default values
         # output resized and cropped image resolution=
-        output_resolution = [128, 128, 256]
+        output_resolution = [128, 128, 256]#######################
 
     if data_name is None:
         data_name = "unknown_data"
@@ -465,6 +465,7 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(
 
     # all patient ids
     case_ids = os.listdir(data_path)
+    # print(f"===== {data_path} case_ids {case_ids}")
 
     if not len(case_ids):  # reise exception if the directory is empty
         raise Exception("Directory %s is empty" % data_path)
@@ -606,7 +607,9 @@ def read_pet_gt_resize_crop_save_as_3d_andor_mip(
                         [pet_mip], affine, path_save=saving_dir_mip, identifier=str(image_name),
                         name=['pet_' + str(naming_)]
                         )
-    return saving_dir_mip
+    
+    ###################return saving_dir_mip
+    return saving_dir_mip if generate_mip else saving_dir_3d
 
 
 # Read .nii files using itk
@@ -615,9 +618,10 @@ if __name__ == '__main__':
     # input_path = r"F:\Data\Remarc\REMARC/"
     # data_ = "remarc"
     #
-    input_path = r"F:\Data\Vienna\No_ground_truth/"
+    input_path = 'data/input'#r"F:\Data\Vienna\No_ground_truth/"
     data_ = "LNH"
     saving_dir_mip = read_pet_gt_resize_crop_save_as_3d_andor_mip(
         data_path=input_path, data_name=data_, saving_dir=None, save_3D=True, crop=True,
-        output_resolution=[128, 128, 256], desired_spacing=None, generate_mip=True
+        output_resolution=[128, 128, 256], desired_spacing=None, generate_mip=False
+        #################output_resolution=[128, 128, 256], desired_spacing=None, generate_mip=True
         )

@@ -146,26 +146,30 @@ class DataLoader:
             for path in list(nii_paths):
                 # get the base name: means the file name
                 identifier_base_name = str(os.path.basename(path)).split('.')[0]
-                if "pet_sagittal" == str(identifier_base_name):
-                    pet_saggital = np.asanyarray(nib.load(path).dataobj)
-                    pet_saggital = np.expand_dims(pet_saggital, axis=0)
+                # if "pet_sagittal" == str(identifier_base_name):
+                #     pet_saggital = np.asanyarray(nib.load(path).dataobj)
+                #     pet_saggital = np.expand_dims(pet_saggital, axis=0)
 
-                elif "pet_coronal" == str(identifier_base_name):
-                    pet_coronal = np.asanyarray(nib.load(path).dataobj)
-                    pet_coronal = np.expand_dims(pet_coronal, axis=0)
+                # elif "pet_coronal" == str(identifier_base_name):
+                #     pet_coronal = np.asanyarray(nib.load(path).dataobj)
+                #     pet_coronal = np.expand_dims(pet_coronal, axis=0)
 
-                if "ground_truth_sagittal" == str(identifier_base_name):
-                    gt_saggital = np.asanyarray(nib.load(path).dataobj)
-                    gt_saggital = np.expand_dims(gt_saggital, axis=0)
+                # if "ground_truth_sagittal" == str(identifier_base_name):
+                #     gt_saggital = np.asanyarray(nib.load(path).dataobj)
+                #     gt_saggital = np.expand_dims(gt_saggital, axis=0)
 
-                elif "ground_truth_coronal" == str(identifier_base_name):
-                    gt_coronal = np.asanyarray(nib.load(path).dataobj)
-                    gt_coronal = np.expand_dims(gt_coronal, axis=0)
+                # elif "ground_truth_coronal" == str(identifier_base_name):
+                #     gt_coronal = np.asanyarray(nib.load(path).dataobj)
+                #     gt_coronal = np.expand_dims(gt_coronal, axis=0)
+                
+                if "pet" == str(identifier_base_name):
+                    pet = np.asanyarray(nib.load(path).dataobj)
+                    pet= np.expand_dims(pet, axis=0)
 
-            # concatenate coronal and sagita images
-            # show
-            pet = np.concatenate((pet_saggital, pet_coronal), axis=0)
-            gt = np.concatenate((gt_saggital, gt_coronal), axis=0)
+                elif "ground_truth" == str(identifier_base_name):
+                    gt = np.asanyarray(nib.load(path).dataobj)
+                    gt = np.expand_dims(gt, axis=0)
+
         return [pet, gt]
 
     @staticmethod

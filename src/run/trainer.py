@@ -64,7 +64,7 @@ K.set_image_data_format('channels_last')
 
 
 def default_training_parameters(
-        num_epochs: int = 4, batch_size: int = 1, early_stop: int = None, fold_number: int = None,
+        num_epochs: int = 4, batch_size: int = 4, early_stop: int = None, fold_number: int = None,
         model_name_save: List[str] = None, loss: str = None, metric: str = None
         ) -> dict:
     """ Configure default parameters for training.
@@ -204,17 +204,23 @@ class NetworkTrainer:
         self.save_all = save_predicted
         self.predicted_directory = predicted_directory
         # load the lfb_network architecture
-        self.model = lfbnet.LfbNet()
+        conv_config = lfbnet.get_default_config(dimension=3)
+        self.model = lfbnet.LfbNet(input_image_shape=np.asarray([64, 64, 64, 1]), conv_config=conv_config)
         self.task = task
 
         # forward network decoder
 
         # latent feedback at zero time: means no feedback from feedback network
         self.latent_dim = self.model.latent_dim
-        self.h_at_zero_time = np.zeros(
-            (int(self.config_trainer['batch_size']), int(self.latent_dim[0]), int(self.latent_dim[1]),
-              int(self.latent_dim[2]), ############i added
-             int(self.latent_dim[3])), np.float32  ##########
+        if conv_config["2D_3D"] == '2D':
+            self.h_at_zero_time = np.zeros(
+                (int(self.config_trainer['batch_size']), int(self.latent_dim[0]), int(self.latent_dim[1]),
+                 int(self.latent_dim[2])), np.float32
+            )
+        elif conv_config["2D_3D"] == '3D':
+            self.h_at_zero_time = np.zeros(
+                (int(self.config_trainer['batch_size']), int(self.latent_dim[0]), int(self.latent_dim[1]),
+                 int(self.latent_dim[2]), int(self.latent_dim[3])), np.float32
             )
 
     @staticmethod
@@ -262,7 +268,6 @@ class NetworkTrainer:
         # training
         if self.task == 'train':
             # training
-
             for current_epoch in range(self.config_trainer['num_epochs']):
                 feedback_loss_dice = []
                 forward_loss_dice = []
@@ -282,13 +287,12 @@ class NetworkTrainer:
 
                         batch_input_data, batch_output_data = self.load_dataset(
                             directory_=self.folder_preprocessed_train, ids_to_read=kk
-                            )  
+                            )
 
                         assert len(batch_input_data) > 0, "batch of data not loaded correctly"
 
                         # shuffle within the batch
                         index_batch = np.random.permutation(int(batch_input_data.shape[0]))
-                        
                         batch_input_data = batch_input_data[index_batch]
                         batch_output_data = batch_output_data[index_batch]
 
@@ -303,13 +307,10 @@ class NetworkTrainer:
                             # Train forward models
                             if current_epoch % 2 == 0:
                                 # step 1: train the forward network encoder and decoder
-                                
                                 loss, dice = self.model.combine_and_train.train_on_batch(
                                     [batch_input, self.h_at_zero_time], [batch_output]
                                     )  # self.h_at_zero_time
-                                
                                 forward_loss_dice.append([loss, dice])
-                                
 
                             else:
                                 predicted_decoder = self.model.combine_and_train.predict(
@@ -331,7 +332,6 @@ class NetworkTrainer:
                                     [output for output in forward_encoder_output], [batch_output]
                                     )
                                 forward_decoder_loss_dice.append([loss, dice])
-                                
 
                 forward_loss_dice = np.array(forward_loss_dice)
                 feedback_loss_dice = np.array(feedback_loss_dice)
@@ -343,13 +343,11 @@ class NetworkTrainer:
                         'Training_forward_system: >%d, '
                         ' fwd_loss = %.3f, fwd_dice=%0.3f, ' % (current_epoch, loss, dice)
                         )
-                      
 
                 else:
-                    
                     loss_forward, dice_forward = np.mean(forward_decoder_loss_dice, axis=0)
                     loss_feedback, dice_feedback = np.mean(feedback_loss_dice, axis=0)
-                    
+
                     print(
                         'Training_forward_decoder_and_feedback_system: >%d, '
                         'fwd_decoder_loss=%03f, '
@@ -514,8 +512,9 @@ class NetworkTrainer:
         # latent  feedback variable h0
         # replace the first number of batches with the number of input images from the first channel
         h0_input = np.zeros(
-            (len(input_image), int(self.latent_dim[0]), int(self.latent_dim[1]), int(self.latent_dim[2]), int(self.latent_dim[3])), np.float32
-            )
+            (len(input_image), int(self.latent_dim[0]), int(self.latent_dim[1]),
+             int(self.latent_dim[2]), int(self.latent_dim[3])), np.float32
+        )
 
         # step 0:
         # Loss and dice on the validation of the forward system
@@ -563,7 +562,7 @@ class NetworkTrainer:
             binary.specificity(NetworkTrainer.threshold_image(predicted), NetworkTrainer.threshold_image(ground_truth))
             )
         # all = np.concatenate((ground_truth, predicted, input_image), axis=0)
-        # NetworkTrainer.display_image(all)
+        # display_image(all)
 
         # Sometimes save predictions
         if self.save_all:
@@ -600,8 +599,6 @@ class NetworkTrainer:
             plt.subplot(3, 2, n + 1)
             plt.imshow(im)  # chart formatting
         plt.show()
-        # temp_file_path = 'temp_plot.png'
-        # plt.savefig(temp_file_path, bbox_inches='tight', pad_inches=0.5)
 
     @staticmethod
     # binary.dc, sen, and specificty works only on binary images

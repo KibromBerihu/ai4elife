@@ -131,45 +131,45 @@ class DataLoader:
         :return:
         """
         # more than one .nii or .nii.gz is found in the folder the first will be returned
-        types = ('/*.nii', '/*.nii.gz')  # the tuple of file types
-        nii_paths = []
-        for files in types:
-            nii_paths.extend([i for i in glob.glob(str(data_directory) + files)])
+        # types = ('/*.nii', '/*.nii.gz')  # the tuple of file types
+        # nii_paths = []
+        # for files in types:
+        #     nii_paths.extend([i for i in glob.glob(str(data_directory) + files)])
 
-        pet, gt = [], []
-        if not len(nii_paths):  # if no file exists that ends wtih .nii.gz or .nii
-            # raise Exception("No .nii or .nii.gz found in %s dirctory" % data_directory)
-            pass
-        else:
-            # assuming the folder contains coronal mips: pet_1, gt_1, and sagittal mips: pet_0, gt_0,
-            pet_saggital, pet_coronal, gt_saggital, gt_coronal = [], [], [], []
-            for path in list(nii_paths):
-                # get the base name: means the file name
-                identifier_base_name = str(os.path.basename(path)).split('.')[0]
-                # if "pet_sagittal" == str(identifier_base_name):
-                #     pet_saggital = np.asanyarray(nib.load(path).dataobj)
-                #     pet_saggital = np.expand_dims(pet_saggital, axis=0)
-
-                # elif "pet_coronal" == str(identifier_base_name):
-                #     pet_coronal = np.asanyarray(nib.load(path).dataobj)
-                #     pet_coronal = np.expand_dims(pet_coronal, axis=0)
-
-                # if "ground_truth_sagittal" == str(identifier_base_name):
-                #     gt_saggital = np.asanyarray(nib.load(path).dataobj)
-                #     gt_saggital = np.expand_dims(gt_saggital, axis=0)
-
-                # elif "ground_truth_coronal" == str(identifier_base_name):
-                #     gt_coronal = np.asanyarray(nib.load(path).dataobj)
-                #     gt_coronal = np.expand_dims(gt_coronal, axis=0)
-                
-                if "pet" == str(identifier_base_name):
-                    pet = np.asanyarray(nib.load(path).dataobj)
-                    pet= np.expand_dims(pet, axis=0)
-
-                elif "ground_truth" == str(identifier_base_name):
-                    gt = np.asanyarray(nib.load(path).dataobj)
-                    gt = np.expand_dims(gt, axis=0)
-
+        # pet, gt = [], []
+        # if not len(nii_paths):  # if no file exists that ends wtih .nii.gz or .nii
+        #     # raise Exception("No .nii or .nii.gz found in %s dirctory" % data_directory)
+        #     pass
+        # else:
+        #     # assuming the folder contains coronal mips: pet_1, gt_1, and sagittal mips: pet_0, gt_0,
+        #     pet_saggital, pet_coronal, gt_saggital, gt_coronal = [], [], [], []
+        #     for path in list(nii_paths):
+        #         # get the base name: means the file name
+        #         identifier_base_name = str(os.path.basename(path)).split('.')[0]
+        #         if "pet_sagittal" == str(identifier_base_name):
+        #             pet_saggital = np.asanyarray(nib.load(path).dataobj)
+        #             pet_saggital = np.expand_dims(pet_saggital, axis=0)
+        #
+        #         elif "pet_coronal" == str(identifier_base_name):
+        #             pet_coronal = np.asanyarray(nib.load(path).dataobj)
+        #             pet_coronal = np.expand_dims(pet_coronal, axis=0)
+        #
+        #         if "ground_truth_sagittal" == str(identifier_base_name):
+        #             gt_saggital = np.asanyarray(nib.load(path).dataobj)
+        #             gt_saggital = np.expand_dims(gt_saggital, axis=0)
+        #
+        #         elif "ground_truth_coronal" == str(identifier_base_name):
+        #             gt_coronal = np.asanyarray(nib.load(path).dataobj)
+        #             gt_coronal = np.expand_dims(gt_coronal, axis=0)
+        #
+        #     # concatenate coronal and sagita images
+        #     # show
+        #     pet = np.concatenate((pet_saggital, pet_coronal), axis=0)
+        #     gt = np.concatenate((gt_saggital, gt_coronal), axis=0)
+        pet = nib.load(os.path.join(data_directory, 'pet.nii')).get_fdata()
+        pet = np.expand_dims(pet, axis=0)
+        gt = nib.load(os.path.join(data_directory, 'ground_truth.nii')).get_fdata()
+        gt = np.expand_dims(gt, axis=0)
         return [pet, gt]
 
     @staticmethod

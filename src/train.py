@@ -20,6 +20,7 @@ Please refer to the requirements.yml or requirements.txt files for the required 
 anaconda virtual environment is recommended to runt the script.
 
 e.g. python train.py  --input_dir path/to/input/data --task [train or valid]
+python train.py --input_dir ../data/hecktor_nii_cropped/ --task train
 
 By K.B. Girum
 """

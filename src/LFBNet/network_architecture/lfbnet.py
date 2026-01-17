@@ -30,13 +30,15 @@ if p not in sys.path:
 # CUDA_VISIBLE_DEVICES = 1
 # os.environ["CUDA_VISIBLE_DEVICES"] = "1"
 
-# local import
+# # local import
+# from get_conv_blocks import StackedConvLayerABlock, UpConvLayer
+# from losses import LossMetric
 from src.LFBNet.network_architecture.get_conv_blocks import StackedConvLayerABlock, UpConvLayer
 from src.LFBNet.losses.losses import LossMetric
 
 
 # function to set/configure default parameters for lfbnet.
-def get_default_config(dimension: int = 2, dropout_ratio: float = 0.5, non_linear_activation: str = 'elu',
+def get_default_config(dimension: int = 3, dropout_ratio: float = 0.5, non_linear_activation: str = 'elu',
         batch_norm: bool = True, strides: int = 1, pooling: bool = True, pool_size:int =2, default_skips: bool = True,
         kernel_size: int = 3, kernel_initializer: str = 'he_normal', use_bias: bool = False, padding: str = 'same',
         num_conv_per_block: int = 2, skip_encoder=None, use_residual: bool = True,
@@ -126,9 +128,11 @@ class LfbNet:
             skipped_input: skipped values from the encoder and to be connected to the decoder.
             num_conv_per_block: a series of consecutive convolution, batch normalization, activation operations.
         """
-
+        
         if input_image_shape is None:
-            input_image_shape = [128, 256, 1]
+            input_image_shape = [64, 64, 64,1]
+            #######[128, 128, 256,1]
+            ##################[128, 256, 1]
 
         self.img_shape = input_image_shape
         self.channels_out = num_output_class
@@ -141,7 +145,9 @@ class LfbNet:
         # add the at last the number of features : base_num_features * latent_dim_input_ratio in feature space
         self.latent_dim[-1] = int(base_num_features * latent_dim_input_ratio)
 
-        self.optimizer = tf.keras.optimizers.Adam(lr=3e-4)
+        # self.optimizer = tf.keras.optimizers.Adam(lr=3e-4)
+        self.optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=3e-4)
+
 
         # if conv_config is not given: take the default values
         if conv_config is None:
@@ -175,10 +181,12 @@ class LfbNet:
             for stage in range(num_layers):
                 skipped_input.append(
                     [int(decoder_input_shape[0] * (2 ** stage)), int(decoder_input_shape[1] * (2 ** stage)),
+                     int(decoder_input_shape[2] * (2 ** stage)), #############I added this
                      int(base_num_features * (2 ** (num_layers - (1 + stage))))])
+                
 
-        # print("skipped_connections setup")
-        # print(skipped_input)
+        print("skipped_connections setup")
+        print(skipped_input)
 
         self.skipped_input = skipped_input
 
@@ -232,13 +240,13 @@ class LfbNet:
         encoder_output.insert(1, img_input_latent)
         decoder_output = self.forward_decoder([encoder_output[i] for i in range(len(encoder_output))])
 
+        
         """
         
         """
 
         # combined model training both encoder and decoder together
         self.combine_and_train = Model(inputs=[img_input, img_input_latent], outputs=[decoder_output])
-
         # print('Forward Encoder and decoder network combined summary: \n ')
         # self.combine_and_train.summary()
 
@@ -258,10 +266,10 @@ class LfbNet:
 
         self.feedback_latent = Model(inputs=[self.fcn_feedback.input],
                                      outputs=[self.fcn_feedback.get_layer('latent_space_fcn').output])
+            
+        """
 
-    """
-
-    """
+        """
 
     def define_forward_encoder(self):
         """ forward system's encoder model.
@@ -309,13 +317,12 @@ class LfbNet:
         # set the two inputs from the two encoders
         inputs_forward_encoder = inputs
         inputs_feedback_encoder = Input(shape=self.latent_dim, name='input_from_feedback')
-
+        
         # change the input dimension into input tensors
         skip_input = []
         for skip in range(len(self.skipped_input) - 1):
             skip_input.append(
                 Input(shape=np.asarray(self.skipped_input[skip + 1]), name='input_from_encoder' + str(skip)))
-
         '''
         The bottleneck need to do the feedback connection: 
         To use U-net-based segmentation jump or comment this block 
@@ -323,7 +330,7 @@ class LfbNet:
 
         concatenate_encoder_feedback = self.conv_config['merging_strategy'](
             [inputs_forward_encoder, inputs_feedback_encoder])
-
+        
         fused_bottle_neck = StackedConvLayerABlock(concatenate_encoder_feedback,
                                                    int(self.base_num_features * (2 ** (self.num_layers - 1))),
                                                    conv_config=self.conv_config, num_conv_per_block=self.conv_config[
@@ -339,14 +346,15 @@ class LfbNet:
 
         # apply drop out at the bottleneck
         fused_bottle_neck = Dropout(self.conv_config['dropout_ratio'])(fused_bottle_neck)
-
+        
         current_up_conv = fused_bottle_neck
 
         for decoder_stage in range(self.num_layers - 1):
             # decrease the number of features per block:  (self.num_decoder_stage-decoder_stage)
             num_output_features = int(self.base_num_features * (2 ** (self.num_layers - (2 + decoder_stage))))
             current_up_conv = UpConvLayer(current_up_conv, num_output_features=num_output_features,
-                                          conv_upsampling="2D").Up_conv_layer()
+                                          conv_upsampling="3D").Up_conv_layer() #####2D
+
             # Need skipp connections:
             if self.conv_config['merging_strategy'] is not None:
                 skipped_ = skip_input[decoder_stage]
@@ -370,7 +378,6 @@ class LfbNet:
         current_up_conv = self.conv_config['conv'](self.num_classes, kernel_size=1, activation=activation,
                                                    kernel_initializer='he_normal', use_bias=False, padding='same',
                                                    name='final_output_layer')(current_up_conv)
-
         skip_input.insert(0, inputs)
         skip_input.insert(1, inputs_feedback_encoder)
 
@@ -406,7 +413,7 @@ class LfbNet:
 
             # up convolution block
             current_up_conv = UpConvLayer(current_up_conv, num_output_features=num_output_features,
-                                          conv_upsampling="2D").Up_conv_layer()
+                                          conv_upsampling="3D").Up_conv_layer() ####2D
 
             # convolution blocks
             current_up_conv = StackedConvLayerABlock(current_up_conv, num_output_features, conv_config=self.conv_config,
@@ -437,5 +444,15 @@ if __name__ == '__main__':
     props = get_default_config()
     model = LfbNet()
     print("network summary \n")
+    print(f"{model.combine_and_train.summary()}\n")
+
+
+    print(f"{model.forward_encoder.summary()}\n")
+
+    print(f"{model.forward_decoder.summary()}\n")
+
+    print(f"{model.feedback_latent.summary()}\n")
+
+    print(f"{model.fcn_feedback.summary()}\n")
 
 

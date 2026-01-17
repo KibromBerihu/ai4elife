@@ -212,12 +212,12 @@ class UpConvLayer:
     """
 
     def __init__(self, stage_input: ndarray, num_output_features: int, kernel_size: int = None, strides: int = None,
-            conv_upsampling: str = '2D'):
+            conv_upsampling: str = '3D'):########2D
 
         if strides is None:
-            self.strides = [2, 2]
+            self.strides = [2, 2,2] #############[2,2]
         if kernel_size is None:
-            self.kernel_size = [2, 2]
+            self.kernel_size = [2, 2,2] #########[2,2]
 
         if conv_upsampling == "3D":
             self.conv_upsampling = Conv3DTranspose

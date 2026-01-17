@@ -215,9 +215,9 @@ class UpConvLayer:
             conv_upsampling: str = '2D'):
 
         if strides is None:
-            self.strides = [2, 2]
+            self.strides = 2
         if kernel_size is None:
-            self.kernel_size = [2, 2]
+            self.kernel_size = 2
 
         if conv_upsampling == "3D":
             self.conv_upsampling = Conv3DTranspose
